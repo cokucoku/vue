@@ -2,14 +2,6 @@
     <input type="text" class="input"  @keyup.enter="$emit('submit',$event.target.value)">
 </template>
 <script>
-export default {
-    props: {
-        value: {
-            type: String,
-            default: '',
-        }
-    }
-}
 </script>
 <style scoped>
 .input {
