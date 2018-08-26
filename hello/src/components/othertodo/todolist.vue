@@ -1,6 +1,6 @@
 <template>
     <div>
-        <todoinput @submit="add"></todoinput>
+        <todoinput @keyup.enter="add" v-model="newip"></todoinput>
         <ul v-if="todos.length">
             <todoitem v-for="(todo,idx) in todos" :key="idx" :todo="todo" @remove="remove(idx)"></todoitem>
         </ul>
@@ -19,6 +19,7 @@ export default {
     },
     data() {
         return {
+            newip:"fgd",
             todos: [{
                     text: '张三'
                 },
@@ -36,8 +37,13 @@ export default {
         remove: function(el) {
             this.todos.splice(el, 1)
         },
-        add: function(v) {
-            this.todos.push({text:v})
+        add: function() {
+            console.log(this.newip)
+            if(newip){
+                this.todos.push({text:newip})
+
+            }
+            //this.todos.push({text:v})
         }
 
     }

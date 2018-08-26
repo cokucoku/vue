@@ -1,7 +1,15 @@
 <template>
-    <input type="text" class="input"  @keyup.enter="$emit('submit',$event.target.value)">
+    <input type="text" class="input" :value="value" @input="$emit('input', $event.target.value)">
 </template>
 <script>
+export default {
+    props: {
+        value: {
+            type: String,
+             default: ''
+        }
+    }
+}
 </script>
 <style scoped>
 .input {
