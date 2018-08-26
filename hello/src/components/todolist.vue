@@ -1,11 +1,11 @@
 <template>
     <div>
-        <todoinput></todoinput>
+        <todoinput @submit="add"></todoinput>
         <ul v-if="todos.length">
-            <todoitem v-for="(todo,idx) in todos" :key="todo.id" :todo="todo" @remove="removetodo(idx)"></todoitem>
+            <todoitem v-for="(todo,idx) in todos" :key="idx" :todo="todo" @remove="remove(idx)"></todoitem>
         </ul>
         <p v-else>
-        	没有数据
+            没有数据
         </p>
     </div>
 </template>
@@ -17,29 +17,29 @@ export default {
         todoinput,
         todoitem
     },
-    data(){
-    	return{
-    		todos:[
-    		{
-    			id:1,
-    			text:'张三'
-    		},
-    		{
-    			id:2,
-    			text:'李四'
-    		},
-    		{
-    			id:3,
-    			text:'王五'
-    		}
-    		]
-    	}
+    data() {
+        return {
+            todos: [{
+                    text: '张三'
+                },
+                {
+
+                    text: '李四'
+                },
+                {
+                    text: '王五'
+                }
+            ]
+        }
     },
-    methods:{
-    	removetodo:function (el) {
-    		this.todos.splice(el, 1)
-    		
-    	}
+    methods: {
+        remove: function(el) {
+            this.todos.splice(el, 1)
+        },
+        add: function(v) {
+            this.todos.push({text:v})
+        }
+
     }
 }
 </script>
