@@ -17,25 +17,24 @@
             page = $(this).text();
             gotopage(page);
         });
-        $(".first").bind('click', function(event) {
+        $(el).find(".first").bind('click', function(event) {
             page = 1;
             gotopage(page);
         });
-        $(".last").bind('click', function(event) {
+        $(el).find(".last").bind('click', function(event) {
             page = tpg;
             gotopage(page);
         });
-        $(".prev").bind('click', function(event) {
+        $(el).find(".prev").bind('click', function(event) {
             if (page > 1) page--;
             gotopage(page);
         });
-        $(".next").bind('click', function(event) {
+        $(el).find(".next").bind('click', function(event) {
             if (page < tpg) page++;
             gotopage(page);
         });
 
         function gotopage(page) {
-            //console.log(arr.clickback)
             arr.clickback.call(this,page);
             $li.eq(page - 1).addClass("on").siblings().removeClass('on');
 
