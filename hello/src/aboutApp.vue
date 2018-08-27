@@ -23,10 +23,6 @@
 </template>
 <script>
 import Swiper from 'swiper'
-
-// require styles
-import 'swiper/dist/css/swiper.css'
-
 export default {
     name: 'aboutapp',
     mounted() {
@@ -48,13 +44,10 @@ body {
     position: relative;
     height: 100%;
 }
-
 .swiper-container,
 #app {
     width: 100%;
     height: 100%;
 }
-
-
-/*@import url(./assets/swiper.min.css)*/
+@import url(./assets/swiper.min.css)
 </style>
