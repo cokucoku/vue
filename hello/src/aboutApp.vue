@@ -23,6 +23,7 @@
 </template>
 <script>
 import Swiper from 'swiper'
+
 // require styles
 import 'swiper/dist/css/swiper.css'
 

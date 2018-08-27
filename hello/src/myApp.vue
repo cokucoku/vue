@@ -13,8 +13,10 @@
 </template>
 <script>
 var mydata;
-var Mock = require('mockjs');
-var $ = require('jquery');
+//var Mock = require('mockjs');
+//var $ = require('jquery');
+import $ from 'jquery'
+import Mock from 'mockjs'
 import { mypage } from './assets/mypage.js' //引入自己写的插件
 Mock.mock(/leeao82.com/, 'get', {
     'list|10': [{
