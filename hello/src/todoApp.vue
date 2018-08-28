@@ -2,7 +2,7 @@
     <div id="todoapp">
         <h1>My Todo App!</h1>
         <todolist></todolist>
-        <topmovie></topmovie>
+        <div id="xxx"><topmovie></topmovie></div>
     </div>
 </template>
 <script>
@@ -14,7 +14,9 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style>
+#xxx{width: 60%;background: #f0f0f0}
+#xxx li{border-bottom: solid 1px #f60}
 #todoapp {
     max-width: 400px;
     margin: 0 auto;

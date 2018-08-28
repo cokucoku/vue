@@ -26,6 +26,6 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style>
 #topmovie li{display: block;line-height: 24px;border-bottom: solid 1px #eee}
 </style>
