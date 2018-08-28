@@ -2,13 +2,15 @@
     <div id="todoapp">
         <h1>My Todo App!</h1>
         <todolist></todolist>
+        <topmovie></topmovie>
     </div>
 </template>
 <script>
 import todolist from './components/todo/todolist.vue'
+import topmovie from './topmovie.vue'
 export default {
     components: {
-        todolist
+        todolist,topmovie
     }
 }
 </script>
