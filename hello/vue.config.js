@@ -99,7 +99,7 @@ module.exports = {
             //chunks: ['chunk-vendors', 'chunk-common', 'index']
         }
     },
-    devServer: {//设置API请求地址代理
+    devServer: {//设置API请求地址代理前后端不再同服务器时候，跨域
         proxy: {
             '/api': {
                 target: 'https://api.douban.com/v2/movie/top250?count=1',
