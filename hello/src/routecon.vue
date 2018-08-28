@@ -1,38 +1,74 @@
-<template id="app">
-    <div id="con">
-        DFDF
-    </div>
+<template>
+    <div id="con">dfdf</div>
 </template>
 <script>
 import Vue from 'vue'
-
+import $ from 'jquery'
 const NotFound = { template: '<p>Page not found</p>' }
 const Home = { template: '<p>home page</p>' }
 const About = { template: '<p>about page</p>' }
 const Todo = { template: '<p>todo page</p>' }
 const Othertodo = { template: '<p>othertodo page</p>' }
 const routes = {
-    '#': Home,
+    'no': NotFound,
+    '': Home,
     '#about': About,
     '#todo': Todo,
     '#othertodo': Othertodo
 }
-new Vue({
-  el: '#app',
-  data: {
-    currentRoute: window.location.pathname
-  },
-  computed: {
-    ViewComponent () {
-      return routes[this.currentRoute] || NotFound
-    }
-  },
-  render (h) { return h(this.ViewComponent) }
-})
+var i = 0;
 
-export default{
- 
+
+export default {
+    data() {
+        return {
+            currentRoute: window.location.hash
+        }
+    },
+    computed: {
+        ViewComponent() {
+            return routes[this.currentRoute] || NotFound
+        }
+    },
+    mounted() {
+        var vm = this;
+        window.addEventListener("hashchange", function() {
+            vm.currentRoute = window.location.hash;
+            $(vm.$el).addClass('move');
+            $(vm.$el).html(vm.ViewComponent.template)
+            setTimeout(aa, 400)
+
+            function aa(argument) {
+                $(vm.$el).removeClass('move')
+            }
+        });
+    }
 }
 </script>
-<style scoped>
+<style>
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none
+}
+
+html,
+body {
+    background: #f0f0f0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.move {
+    animation: moves .4s ease both;
+}
+
+@keyframes moves {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
 </style>

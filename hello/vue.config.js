@@ -83,6 +83,30 @@ module.exports = {
             // 在这个页面中包含的块，默认情况下会包含
             // 提取出来的通用 chunk 和 vendor chunk。
             //chunks: ['chunk-vendors', 'chunk-common', 'index']
+        },
+        topmovie: {
+            // page 的入口
+            entry: 'src/topmovie.js',
+            // 模板来源
+            template: 'public/topmovie.html',
+            // 在 dist/index.html 的输出
+            filename: 'topmovie.html',
+            // 当使用 title 选项时，
+            // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
+            title: 'topmovie Page',
+            // 在这个页面中包含的块，默认情况下会包含
+            // 提取出来的通用 chunk 和 vendor chunk。
+            //chunks: ['chunk-vendors', 'chunk-common', 'index']
+        }
+    },
+    devServer: {//设置API请求地址代理
+        proxy: {
+            '/api': {
+                target: 'https://api.douban.com/v2/movie/top250?count=1',
+                ws: true,
+                changeOrigin: true
+            }
         }
     }
+
 }
