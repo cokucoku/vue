@@ -1,22 +1,39 @@
 <template>
-    <div id="app">
+    <div id="rapp">
         <nav>
             <ul>
                 <myli href="/">Home</myli>
                 <myli href="/about">About</myli>
             </ul>
         </nav>
-        <slot></slot>
+        <slot>{{ViewComponent}}</slot>
     </div>
 </template>
 <script>
-import Myli from './components/Myli.vue'
 
+import Myli from './components/Myli.vue'
 export default {
     components: {
         Myli
-    }
+    },
+    data() {
+        return {
+            cururl: location.pathname,
+            router: {'/': './components/page/Home.vue','/about': './components/page/About.vue'
+            }
+        }
+    },
+    computed: {
+        ViewComponent() {
+            return this.router[this.cururl]
+            //return "mypagessss"
+        }
+    },
+    //render: h => h('h1',["h111111111"])
 }
+window.addEventListener('popstate', () => {
+  //app.cururl = location.pathname
+})
 </script>
 <style>
 * {
@@ -25,7 +42,7 @@ export default {
     list-style: none;
 }
 
-#app {
+#rapp {
     margin: 20px auto;
     background: #eee;
     width: 60%;

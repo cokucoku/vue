@@ -7,6 +7,7 @@
 </template>
 <script>
 export default {
+    name:'myli',
     props: {
         href: {
             type: String
@@ -18,12 +19,14 @@ export default {
         }
     },
     methods: {
-        go(ev) {
+        go() {
+            history.pushState(null, null, this.href)
+            this.$parent.cururl = this.href
 
         }
     }
-
 }
+
 </script>
 <style>
 </style>
