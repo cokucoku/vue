@@ -97,14 +97,39 @@ module.exports = {
             // 在这个页面中包含的块，默认情况下会包含
             // 提取出来的通用 chunk 和 vendor chunk。
             //chunks: ['chunk-vendors', 'chunk-common', 'index']
+        },
+        fetch: {
+            // page 的入口
+            entry: 'src/fetch.js',
+            // 模板来源
+            template: 'public/fetch.html',
+            // 在 dist/index.html 的输出
+            filename: 'fetch.html',
+            // 当使用 title 选项时，
+            // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
+            title: 'fetch Page',
+            // 在这个页面中包含的块，默认情况下会包含
+            // 提取出来的通用 chunk 和 vendor chunk。
+            //chunks: ['chunk-vendors', 'chunk-common', 'index']
         }
     },
-    devServer: {//设置API请求地址代理前后端不再同服务器时候，跨域
+    devServer: { //设置API请求地址代理前后端不再同服务器时候，跨域
         proxy: {
-            '/api': {
-                target: 'https://api.douban.com/v2/movie/top250?count=1',
+            '/top250': {
+                target: 'https://api.douban.com/v2/movie',
                 ws: true,
-                changeOrigin: true
+                changeOrigin: true,
+
+            },
+            '/api': {//一定要命名为API名字，因为实际地址有api
+                target: 'https://www.sojson.com',//好像我猜測這個一定404
+                ws: true,
+                changeOrigin: true,
+            },
+            '/201306': {
+                target: 'https://www.zhangxinxu.com/study',//好像我猜測這個一定404
+                ws: true,
+                changeOrigin: true,
             }
         }
     }
