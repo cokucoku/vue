@@ -16,7 +16,7 @@ export default {
     beforeCreate() {
         var _self = this;
         $.ajax({
-            url: '/api',
+            url: '/top250?count=20',
             dataType: 'json',
             success: function(ds) {
                 _self.movie=ds.subjects

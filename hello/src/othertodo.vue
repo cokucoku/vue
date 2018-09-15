@@ -2,17 +2,22 @@
     <div id="todoapp">
         <h1>My Todo App!</h1>
         <todolist></todolist>
+        <qqmusic></qqmusic>
+        <bdsearch></bdsearch>
     </div>
 </template>
 <script>
 import todolist from './components/othertodo/todolist.vue'
+import qqmusic from './components/othertodo/qqmusic.vue'
+import bdsearch from './components/othertodo/bdsearch.vue'
 export default {
     components: {
-        todolist
+        todolist,qqmusic,bdsearch
     }
 }
 </script>
 <style scoped>
+input{box-sizing: border-box;}
 #todoapp {
     max-width: 400px;
     margin: 0 auto;
@@ -26,4 +31,5 @@ export default {
 h1 {
     text-align: center;
 }
+
 </style>

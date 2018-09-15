@@ -1,9 +1,11 @@
 <template>
     <div>
         <todoinput @keyup.enter="addtodo" v-model="newip"></todoinput>
-        <ul v-if="todos.length">
-            <todoitem v-for="(todo,idx) in todos" :key="idx" :todo="todo" @remove="remove(idx)"></todoitem>
-        </ul>
+        <div v-if="todos.length" class="todolist">
+            <transition-group name="list" tag="ul">
+                <todoitem v-for="(todo,idx) in todos" :key="todo.text" :todo="todo" @remove="remove(idx)"></todoitem>
+            </transition-group>
+        </div>
         <p v-else>
             没有数据
         </p>
@@ -19,7 +21,7 @@ export default {
     },
     data() {
         return {
-            newip:"",
+            newip: "",
             todos: [{
                     text: '张三'
                 },
@@ -38,14 +40,29 @@ export default {
             this.todos.splice(el, 1)
         },
         addtodo: function() {
-            if(this.newip){
-                this.todos.push({text:this.newip})
+            if (this.newip) {
+                this.todos.push({ text: this.newip })
             }
-           
+
         }
 
     }
 }
 </script>
 <style scoped>
+.todolist li{transition: all 1s;}
+.list-enter-active,
+.list-leave-active {
+    transition: all 1s;
+}
+
+.list-leave-active {
+    position: absolute;
+}
+
+.list-enter,
+.list-leave-to {
+    opacity: 0;
+    transform: translateY(-30px);
+}
 </style>
