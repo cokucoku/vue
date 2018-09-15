@@ -8,17 +8,18 @@
 </template>
 <script>
 var _self;
-var _this=document;
-console.log(_this)
 import $ from 'jquery'
 export default {
-    name:"bdsearch",
+    name: "bdsearch",
     data() {
         return {
             searchlist: '',
             keyword: '',
             open: false
         }
+    },
+    beforeCreate(){//很重要这样一开始就把_self变成这个VUE实例了，为了配合后面的document点击关闭
+        _self=this;
     },
     methods: {
         go(item) {
@@ -33,7 +34,6 @@ export default {
             }
         },
         search() {
-            _self = this;
             if (this.keyword) {
                 this.open = true
             } else {
@@ -52,8 +52,8 @@ export default {
     }
 }
 
-$(_this).click(function(event) {
-  _self.open=false;
+$(document).click(function(event) {
+    _self.open = false;
 });
 </script>
 <style scoped>
