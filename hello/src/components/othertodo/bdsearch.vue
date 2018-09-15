@@ -1,9 +1,11 @@
 <template>
     <div class="searchform">
         <input type="text" name="keyword" autocomplete="off" v-model="keyword" @keyup="search" @focus="show" @click.stop="show">
-        <ul :style="{display:open?'block':'none'}">
-            <li v-for="item in searchlist" :key="item" @click="go(item)">{{item}}</li>
-        </ul>
+        <div :style="{display:open?'block':'none'}">
+            <transition-group name="list" tag="ul">
+                <li v-for="(item,inx) in searchlist" :key="item" @click="go(item)">{{item}}<i @click.stop="del(inx)">x</i></li>
+            </transition-group>
+        </div>
     </div>
 </template>
 <script>
@@ -18,10 +20,13 @@ export default {
             open: false
         }
     },
-    beforeCreate(){//很重要这样一开始就把_self变成这个VUE实例了，为了配合后面的document点击关闭
-        _self=this;
+    beforeCreate() { //很重要这样一开始就把_self变成这个VUE实例了，为了配合后面的document点击关闭
+        _self = this;
     },
     methods: {
+        del: function(i) {
+            this.searchlist.splice(i, 1)
+        },
         go(item) {
             window.open("https://www.baidu.com/s?wd=" + item)
         },
@@ -88,14 +93,38 @@ $(document).click(function(event) {
     top: 33px;
     box-shadow: 0 1px 2px #ddd;
     line-height: 26px;
-    font-size: 14px
+    font-size: 14px;
+    overflow: hidden;
 }
 
 .searchform ul li {
     padding: 0 10px;
+    transition: all 1s;
+    width: 100%
+}
+
+.searchform ul li i {
+    float: right;
+    cursor: pointer;
+    color: #f00
 }
 
 .searchform ul li:hover {
     background: #ddd
+}
+
+.list-enter-active,
+.list-leave-active {
+    transition: all 1s;
+}
+
+.list-leave-active {
+    position: absolute;
+}
+
+.list-enter,
+.list-leave-to {
+    opacity: 0;
+    transform: translateY(-30px);
 }
 </style>
