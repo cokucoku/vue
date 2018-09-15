@@ -8,6 +8,8 @@
 </template>
 <script>
 var _self;
+var _this=document;
+console.log(_this)
 import $ from 'jquery'
 export default {
     name:"bdsearch",
@@ -50,7 +52,7 @@ export default {
     }
 }
 
-$(document).click(function(event) {
+$(_this).click(function(event) {
   _self.open=false;
 });
 </script>
