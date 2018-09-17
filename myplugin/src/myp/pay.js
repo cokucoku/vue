@@ -11,6 +11,7 @@ mypay.install = function(Vue, opt) {
         instance.show = true;
         instance.choose = myopt.choose;
         instance.bg = myopt.bg;
+        myopt.clickback.call(this, instance.pay);
     }
 }
 export default mypay;

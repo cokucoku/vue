@@ -1,18 +1,21 @@
 <template>
     <div id="mytest">
-        <loading duration='2s' :isshow='show'></loading>
-        <!-- <button @click="show = !show">显示/隐藏loading</button> -->
+        <loading :duration='8'></loading>
         <button @click="toast">显示taost弹出框</button>
         <button @click="pay">我要支付</button>
+        你選擇了{{pays}}
     </div>
 </template>
 <script>
+//var a=this.$children;
+// setTimeout(function () {
+//     a[0].show=false;
+// },2000)
 export default {
     name: "app",
     data() {
         return {
-            show: true,
-
+            pays: ''
         };
     },
     methods: {
@@ -21,9 +24,13 @@ export default {
         },
         pay() {
             this.$pay({
-                'choose': ['微信支付','支付宝','花呗支付','农业银行','余额宝'],
-                'bg':'#4eccc4'
+                'choose': ['微信支付', '支付宝', '花呗支付', '农业银行', '余额宝'],
+                'bg': '#4eccc4',
+                clickback: function(el) {
+                    this.pays=el
+                }
             });
+
         }
     }
 };

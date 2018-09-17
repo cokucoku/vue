@@ -4,7 +4,7 @@
             <div class="PayChose" v-if="show">
                 <div class="okdiv" @click="show=!show" :style="{'background':bg}">关闭</div>
                 <ul>
-                    <li v-for="item in choose">{{item}}</li>
+                    <li v-for="item in choose" @click="sel(item)"  :style="{'color':pay===item?bg:''}">{{item}}</li>
                 </ul>
             </div>
         </transition>
@@ -19,8 +19,14 @@ export default {
         return {
             show: false,
             choose: ['微信支付', '支付宝', '花呗支付', '农业银行'],
-            bg: '#666'
+            bg: '#666',
+            pay:'sdf'
         };
+    },
+    methods:{
+        sel(el){
+            this.pay=el
+        }
     }
 };
 </script>
@@ -46,9 +52,9 @@ export default {
     line-height: 34px;
     border-top: solid 1px #ddd;
     padding: 0 15px;
-    text-align: center
+    text-align: center;cursor: pointer;
 }
-
+.PayChose li.cur{}
 .mark {
     position: fixed;
     width: 100%;
