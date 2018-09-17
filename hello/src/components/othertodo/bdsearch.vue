@@ -70,7 +70,7 @@ $(document).click(function(event) {
 }
 
 .searchform {
-
+   
     position: relative;
 }
 
@@ -87,6 +87,8 @@ $(document).click(function(event) {
 }
 
 .searchform ul {
+    background: #FFF;
+    z-index: 33;
     border: solid 1px #ddd;
     position: absolute;
     width: 100%;

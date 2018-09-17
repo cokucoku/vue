@@ -5,7 +5,6 @@ mytaost.install = function(Vue, opt) {
     const ToastConstructor = Vue.extend(taostComponent)
     // 生成一个该子类的实例
     const instance = new ToastConstructor();
-    console.log(instance)
     instance.$mount(document.createElement('div'))
     document.body.appendChild(instance.$el)
     Vue.prototype.$toast = function(msg, myopt) {
