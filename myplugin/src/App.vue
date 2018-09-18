@@ -1,36 +1,38 @@
 <template>
     <div id="mytest">
-        <loading :duration='8'></loading>
+        <loading :duration='4' v-if="isshow"></loading>
+        <button @click="load">显示loadding</button>
         <button @click="toast">显示taost弹出框</button>
         <button @click="pay">我要支付</button>
         你選擇了{{pays}}
     </div>
 </template>
 <script>
-//var a=this.$children;
-// setTimeout(function () {
-//     a[0].show=false;
-// },2000)
 export default {
     name: "app",
     data() {
         return {
-            pays: ''
+            isshow:false
         };
     },
+
+    computed: {
+        pays() {
+            return this.$mychoose()
+        }
+    },
     methods: {
+        load() {
+            this.isshow=true
+        },
         toast() {
             this.$toast("你好", { 'duration': 3000, 'thme': 'red' });
         },
         pay() {
             this.$pay({
                 'choose': ['微信支付', '支付宝', '花呗支付', '农业银行', '余额宝'],
-                'bg': '#4eccc4',
-                clickback: function(el) {
-                    this.pays=el
-                }
+                'bg': '#4eccc4'
             });
-
         }
     }
 };

@@ -2,30 +2,37 @@
     <div>
         <transition name="slideUp">
             <div class="PayChose" v-if="show">
-                <div class="okdiv" @click="show=!show" :style="{'background':bg}">关闭</div>
+                <div class="okdiv" @click="chuli" :style="{'background':bg}">关闭</div>
                 <ul>
-                    <li v-for="item in choose" @click="sel(item)"  :style="{'color':pay===item?bg:''}">{{item}}</li>
+                    <li v-for="item in choose" @click="sel(item)"  :style="{'color':tempay===item?bg:''}">{{item}}</li>
                 </ul>
             </div>
         </transition>
         <transition name="fade">
-            <div class="mark" @click="show=!show" v-if="show"></div>
+            <div class="mark" @click="chuli" v-if="show"></div>
         </transition>
     </div>
 </template>
 <script>
+
 export default {
     data() {
         return {
             show: false,
             choose: ['微信支付', '支付宝', '花呗支付', '农业银行'],
             bg: '#666',
-            pay:'sdf'
+            tempay:'',
+            pay:''
         };
     },
     methods:{
         sel(el){
-            this.pay=el
+            this.tempay=el
+        },
+        chuli(){
+            this.show=!this.show;
+            this.pay=this.tempay
+
         }
     }
 };

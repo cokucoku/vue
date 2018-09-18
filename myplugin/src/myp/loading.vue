@@ -8,7 +8,8 @@ export default {
     data() {
         return {
             isshow: true
-        }
+
+        };
     },
     props: {
         duration: {
@@ -18,9 +19,10 @@ export default {
     },
     mounted() { //很重要这样一开始就把_self变成这个VUE实例了，
         var _self = this;
-        setTimeout(function() {
+        var ii=setTimeout(function() {
             _self.isshow = false;
         }, this.duration * 1000)
+
 
     }
 };

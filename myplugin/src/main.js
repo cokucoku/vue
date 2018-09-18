@@ -5,7 +5,7 @@ import Loading from './myp/loading.js'
 import Pay from './myp/pay.js'
 Vue.use(Toast)
 Vue.use(Loading)
-Vue.use(Pay)
+Vue.use(Pay,{"mysss":true})
 Vue.config.productionTip = false
 
 var myapp=new Vue({
