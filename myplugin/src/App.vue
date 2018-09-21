@@ -4,11 +4,12 @@
         <button @click="load">显示loadding</button>
         <button @click="toast">显示taost弹出框</button>
         <button @click="pay">我要支付你選擇了{{pays}}</button>
-        <button @click="city">城市选择</button>
+        <button @click="city">城市选择{{selcity}}</button>
         <switchs v-model="toggle"></switchs>{{toggle}}
         <!-- <ul class="mytq">
             <li v-for="item in tq" :key="item.date"></li>
         </ul> -->
+        {{whichcity}}
         <ul class="mytq" v-if="mydata.length">
             <li>{{whichcity}}</li>
             <li v-for="item in mydata">
@@ -32,10 +33,7 @@ export default {
         };
     },
     mounted() {
-       
-    },
-    watch:{
-        whichcity
+     
     },
     computed: {
         pays() {
@@ -52,7 +50,7 @@ export default {
                 url: '/open/api/weather/json.shtml',
                 type: 'get',
                 dataType: 'json',
-                data: { city: _self.whichcity},
+                data: { city: _self.whichcity },
                 //data: {city:_self.$citysel().city},
                 success: function(ds) {
                     _self.mydata = ds.data.forecast
@@ -76,6 +74,9 @@ export default {
         },
         city() {
             this.$city();
+        },
+        citycho(curVal, oldVal) {
+            return "sdfdfdf"
         }
     }
 };
