@@ -4,6 +4,7 @@
         <todolist></todolist>
         <qqmusic></qqmusic>
         <bdsearch></bdsearch>
+        <watchinput></watchinput>
         <calendar></calendar>
     </div>
 </template>
@@ -12,9 +13,10 @@ import todolist from './components/othertodo/todolist.vue'
 import qqmusic from './components/othertodo/qqmusic.vue'
 import bdsearch from './components/othertodo/bdsearch.vue'
 import calendar from './components/othertodo/calendar.vue'
+import watchinput from './components/othertodo/watchinput.vue'
 export default {
     components: {
-        todolist,qqmusic,bdsearch,calendar
+        todolist,qqmusic,bdsearch,calendar,watchinput
     }
 }
 </script>
