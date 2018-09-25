@@ -1,7 +1,7 @@
 <template>
     <div>
-        <input type="text">
-        <li>{{label}}</li>
+        <input type="text"  @input="$emit('input',$event.target.value)" :value="value">
+        <li>{{label}}/{{value1}}</li>
     </div>
 </template>
 <script>
@@ -13,6 +13,10 @@ export default {
     },
     props: {
         label: {
+            type: String,
+            default: ''
+        },
+        value1: {
             type: String,
             default: ''
         },
