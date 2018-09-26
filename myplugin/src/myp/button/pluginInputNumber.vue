@@ -1,9 +1,9 @@
 <template>
     <div class="el-input-number">
-        <span role="button" class="el-input-number_decrease" :class="{'is-disabled':value<=min?true:false}" @click="dec"><i>-</i></span>
-        <span role="button" class="el-input-number_increase" :class="{'is-disabled':value>=max?true:false}" @click="inc"><i>+</i></span>
+        <span role="button" class="el-input-number_decrease" :class="{'is-disabled':currentValue<=min?true:false}" @click="dec"><i>-</i></span>
+        <span role="button" class="el-input-number_increase" :class="{'is-disabled':currentValue>=max?true:false}" @click="inc"><i>+</i></span>
         <div class="el-input">
-            <input type="text" v-bind="$attrs" class="el-input_inner" :value="value" v-on="inputListeners">
+            <input ref="input" type="text" v-bind="$attrs" class="el-input_inner" :value="currentValue" v-on="inputListeners">
         </div>
     </div>
 </template>
@@ -12,14 +12,10 @@ export default {
     inheritAttrs: false,
     data() {
         return {
-            ipv: 0
+            currentValue: 0
         };
     },
-    mounted() {
-        this.ipv = this.value
-
-
-    },
+    mounted() {},
     props: {
         value: {
             type: Number,
@@ -36,31 +32,40 @@ export default {
     },
     methods: {
         dec() {
-            this.ipv--
+            this.currentValue--;
+            if (this.currentValue < this.min) {
+                this.currentValue = this.min
+                return
+            }
+            this.$emit('input', this.currentValue);
+            this.$emit('change', this.currentValue);
+
         },
         inc() {
-            this.ipv++
+            this.currentValue++;
+            if (this.currentValue > this.max) {
+                this.currentValue = this.max
+                return
+            }
+            this.$emit('input', this.currentValue);
+            this.$emit('change', this.currentValue);
 
         }
     },
     watch: {
-        value(val) {
-            // if (val <= this.min) {
-            //     val = this.min
-            // } else if (val >= this.max) {
-            //     val = this.max
-            // } else { val = val }
-            this.ipv = val;
-        },
-        ipv(val) {
-            val=parseInt(val);
+        value: {
+            immediate: true,
+            handler(value) {
+                var newVal = Number(value);
+                if (isNaN(newVal)) {
+                    newVal = this.currentValue
+                }
+                if (newVal >= this.max) newVal = this.max;
+                if (newVal <= this.min) newVal = this.min;
+                this.currentValue = newVal;
+                this.$emit('input', newVal);
 
-            if (val <= this.min) {
-                val = this.min
-            } else if (val >= this.max) {
-                val = this.max
-            } else { val = val }
-            this.$emit('input', val);
+            }
         }
     },
     computed: {
@@ -69,18 +74,19 @@ export default {
             return Object.assign({}, this.$listeners, {
                 // 这里确保组件配合 `v-model` 的工作
                 input: function(event) {
-                    var jg = parseInt(event.target.value)
+                    //var jg = Number(event.target.value)
                     //vm.$emit('input', jg);
                 },
                 change: function(event) {
-                    var jg = parseInt(event.target.value)
-                   
-                   
+                    var jg = Number(event.target.value)
+                    if (isNaN(jg)) {
+                        jg = vm.currentValue
+                    }
+                    if (jg >= vm.max) jg = vm.max;
+                    if (jg <= vm.min) jg = vm.min;
+                    vm.$refs.input.value = jg;
                     vm.$emit('change', jg)
                     vm.$emit('input', jg)
-                  
-
-
                 }
             })
         }
@@ -157,5 +163,6 @@ export default {
 .el-input-number_increase.is-disabled {
     color: #c0c4cc;
     cursor: not-allowed;
+    /*pointer-events: none;*/
 }
 </style>

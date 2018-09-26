@@ -18,7 +18,7 @@ export default {
     name: "app",
     data() {
         return {
-            num1:1
+            num1:135
         }
     },
     mounted() {
