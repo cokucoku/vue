@@ -24,6 +24,7 @@ city.install = function(Vue) {
                 instance.province = ds.province;
                 instance.city = ds.city[poneid]
                 instance.district = ds.district[coneid]
+                instance.num.push(instance.province.length,instance.city.length,instance.district.length)
                 instance.temsel = { 'province': ponename, 'city': conename, 'district': donename } //认零时选择的省市区
 
             }

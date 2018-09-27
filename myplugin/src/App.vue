@@ -1,10 +1,10 @@
 <template>
     <div id="mytest">
-        <loading :duration='4' v-if="isshow"></loading>
+        <loading :dur="4"  v-bind:visible.sync="kg"></loading>
         <button @click="load">显示loadding</button>
         <button @click="toast">显示taost弹出框</button>
         <button @click="pay">我要支付你選擇了{{pays}}</button>
-        <button @click="city">城市选择{{selcity}}</button>
+        <button @click="city">城市选择</button>
         <switchs v-model="toggle"></switchs>{{toggle}}
         <!-- <ul class="mytq">
             <li v-for="item in tq" :key="item.date"></li>
@@ -26,7 +26,7 @@ export default {
     name: "app",
     data() {
         return {
-            isshow: false,
+            kg: false,
             toggle: true,
             mydata: '',
             whichcity: '北京市',
@@ -62,7 +62,7 @@ export default {
     },
     methods: {
         load() {
-            this.isshow = true;
+            this.kg = true;
         },
         toast() {
             this.$toast("你好", { 'duration': 3000, 'thme': 'red' });

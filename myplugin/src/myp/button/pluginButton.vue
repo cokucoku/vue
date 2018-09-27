@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="lee-button" :class="type">
+    <button type="button" :class="['lee-button','lee-button-'+type]">
         <span><slot></slot></span>
     </button>
 </template>
@@ -43,27 +43,27 @@ export default {
     border-radius: 4px;
 }
 
-.primary {
+.lee-button-primary {
     color: #fff;
     background-color: #409eff;
     border-color: #409eff;
 }
-.success {
+.lee-button-success {
     color: #fff;
     background-color: #67c23a;
     border-color: #67c23a;
 }
-.info {
+.lee-button-info {
     color: #fff;
     background-color: #909399;
     border-color: #909399;
 }
-.warning {
+.lee-button-warning {
     color: #fff;
     background-color: #e6a23c;
     border-color: #e6a23c;
 }
-.danger {
+.lee-button-danger {
     color: #fff;
     background-color: #f56c6c;
     border-color: #f56c6c;

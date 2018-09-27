@@ -1,22 +1,23 @@
 <template>
- <el-input-number v-model="num1" @change="handleChange" size="small" :min="1" :max="10" label="描述文字"></el-input-number>
+    <el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
+        <span>这是一段信息</span>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
 </template>
 <script>
 export default {
     data() {
         return {
-            num1: 1
+            dialogVisible: true
         };
-    },
-    methods: {
-      handleChange(value) {
-        console.log(value);
-      }
     }
 }
 </script>
 <style>
-#app i {
-    font-size: 34px
+.myselect .el-select .el-input.is-focus .el-input__inner {
+    border-color: #f60
 }
 </style>

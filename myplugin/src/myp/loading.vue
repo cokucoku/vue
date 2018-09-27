@@ -1,28 +1,44 @@
 <template>
     <div class='loading' v-if="isshow">
-        <img src="./loading.gif">加載...{{duration}}
+        <img src="./loading.gif">加載...{{dur}}
     </div>
 </template>
 <script>
+// var _self;
 export default {
+
     data() {
         return {
-            isshow: true
-
+            isshow: false
         };
     },
     props: {
-        duration: {
+        dur: {
             type: Number,
             default: 1 //默认1s
+        },
+        visible: {
+            type: Boolean,
+            default: false
         }
     },
-    mounted() { //很重要这样一开始就把_self变成这个VUE实例了，
-        var _self = this;
-        var ii=setTimeout(function() {
-            _self.isshow = false;
-        }, this.duration * 1000)
-
+    watch: {
+        visible: {
+            immediate: true,
+            handler(value) {
+                this.isshow = value
+                var _self = this;
+                setTimeout(function() {
+                    if (value) {
+                        _self.$emit('update:visible', false)
+                        _self.isshow = false
+                    }
+                }, 6000)
+            }
+        }
+    },
+    beforeCreate() {
+        //_self = this;
 
     }
 };

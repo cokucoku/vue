@@ -5,7 +5,7 @@
                 <div class="btns">
                     <span class="qx" @click="show=!show">取消</span>
                     <span class="sel">{{temsel.province}}/{{temsel.city}}/{{temsel.district}}</span>
-                    <span class="qd" @click="chuli">确定</span>
+                    <span class="qd" @click="close">确定</span>
                 </div>
                 <div class="content">
                     <div class="curline"></div>
@@ -14,23 +14,23 @@
                     <ul class="province">
                         <li></li>
                         <li></li>
-                        <li :tid="item.id" @click.stop="selp($event,item.name,item.id)" v-for="item in province" :class="{cur:temsel.province===item.name}" @touchstart="ts($event,0)" @touchmove="tm($event,0)" @touchend="te($event,0)">{{item.name}}</li>
+                        <li :tid="item.id" @click.stop="sel($event,0)" v-for="item in province" :class="{cur:temsel.province===item.name}" @touchstart="ts($event,0)" @touchmove="tm($event,0)" @touchend="te($event,0)">{{item.name}}</li>
                     </ul>
                     <ul class="city">
                         <li></li>
                         <li></li>
-                        <li :tid="item.id" @click.stop="selc($event,item.name,item.id)" v-for="item in city" :class="{cur:temsel.city===item.name}" @touchstart="ts($event,1)" @touchmove="tm($event,1)" @touchend="te($event,1)">{{item.name}}</li>
+                        <li :tid="item.id" @click.stop="sel($event,1)" v-for="item in city" :class="{cur:temsel.city===item.name}" @touchstart="ts($event,1)" @touchmove="tm($event,1)" @touchend="te($event,1)">{{item.name}}</li>
                     </ul>
                     <ul class="district">
                         <li></li>
                         <li></li>
-                        <li :tid="item.id" @click.stop="seld($event,item.name)" v-for="item in district" :class="{cur:temsel.district===item.name}" @touchstart="ts($event,2)" @touchmove="tm($event,2)" @touchend="te($event,2)">{{item.name}}</li>
+                        <li :tid="item.id" @click.stop="sel($event,2)" v-for="item in district" :class="{cur:temsel.district===item.name}" @touchstart="ts($event,2)" @touchmove="tm($event,2)" @touchend="te($event,2)">{{item.name}}</li>
                     </ul>
                 </div>
             </div>
         </transition>
         <transition name="fade">
-            <div class="mark" @click="chuli" v-if="show"></div>
+            <div class="mark" @click="close" v-if="show"></div>
         </transition>
     </div>
 </template>
@@ -50,6 +50,7 @@ export default {
             movepos: [0, 0, 0],
             maxh: [0, 0, 0],
             ox: [0, 0, 0],
+            num:[]
         };
     },
     methods: {
@@ -66,142 +67,32 @@ export default {
             });
         },
         te(e, index) {
-            var nid;
+            var nid,lastxh;
             var $ul = e.target.parentElement;
             var allli = $($ul).find('li');
-            var lastxh;
             this.curpos[index] += this.movepos[index];
-            var num = $($ul).find('li').length;
-            this.maxh[index] = -(num * 34 - 102);
-            if (this.curpos[index] > 0) {
-                this.curpos[index] = 0
-                if (index == 0) {
-                    this.temsel.province = allli.eq(2).text()
-                } else if (index == 1) {
-                    this.temsel.city = allli.eq(2).text()
-                } else {
-                    this.temsel.district = allli.eq(2).text()
-                }
-            } else if (this.curpos[index] < this.maxh[index]) {
-                this.curpos[index] = this.maxh[index]
-                lastxh = (parseInt(this.curpos[index] / 34));
-                lastxh = Math.abs(lastxh)
-                if (index == 0) {
-                    this.temsel.province = allli.eq(lastxh + 2).text()
-                } else if (index == 1) {
-                    this.temsel.city = allli.eq(lastxh + 2).text()
-                } else {
-                    this.temsel.district = allli.eq(lastxh + 2).text()
-                }
-            } else {
-                //功能为拖动自动耦合
+            // $($ul).css({
+            //     'transform': 'translateY(' + (this.curpos[index]) + 'px)',
+            //     'transition': 'all .1s'
+            // });
 
-                if (this.curpos[index] % 34 == 0) {
-                    this.curpos[index] = this.curpos[index];
-                } else {
-                    if ((Math.abs(this.curpos[index]) % 34) > 12) {
-                        lastxh = (parseInt(this.curpos[index] / 34)) - 1;
-                        this.curpos[index] = lastxh * 34
-                    } else {
-                        lastxh = (parseInt(this.curpos[index] / 34));
-                        this.curpos[index] = lastxh * 34
-                    }
-                    lastxh = Math.abs(lastxh)
-
-                    if (index == 0) {
-                        this.temsel.province = allli.eq(lastxh + 2).text()
-                        nid = allli.eq(lastxh + 2).attr('tid')
-                        this.city = this.alldata.city[nid] //选项市改变
-                        this.temsel.city = this.city[0].name //选项市改变
-                        var cid = this.city[0].id
-                        this.district = this.alldata.district[cid] //选项区县改变
-                        this.temsel.district = this.district[0].name //选项区县改变
-                        $($ul).siblings().css({
-                            'transform': 'translateY(0)',
-                            'transition': 'all .1s'
-                        });
-                        this.curpos[1] = 0;
-                        this.curpos[2] = 0;
-
-                    } else if (index == 1) {
-                        this.temsel.city = allli.eq(lastxh + 2).text()
-                        nid = allli.eq(lastxh + 2).attr('tid')
-                        this.district = this.alldata.district[nid]
-                        $($ul).siblings('.district').css({
-                            'transform': 'translateY(0)',
-                            'transition': 'all .1s'
-                        });
-                        this.curpos[2] = 0;
-                    } else {
-                        this.temsel.district = allli.eq(lastxh + 2).text()
-                    }
-
-                }
-            }
-            $($ul).css({
-                'transform': 'translateY(' + (this.curpos[index]) + 'px)',
-                'transition': 'all .1s'
-            });
+            //chuli(curpos,index)
         },
-        selp($event, el, id) {
-            var ind = $($event.target).index();
-            var $ul = $event.target.parentElement;
-            var mpos = 34 * (ind - 2);
-            this.curpos[0] = -mpos;
-            $($ul).css({
-                'transform': 'translateY(' + (this.curpos[0]) + 'px)',
-                'transition': 'all .1s'
-            });
-            var cid;
-            this.temsel.province = el //选项省改变
-            this.city = this.alldata.city[id] //选项市改变
-            this.temsel.city = this.city[0].name //选项市改变
-            cid = this.city[0].id
-            this.district = this.alldata.district[cid] //选项区县改变
-            this.temsel.district = this.district[0].name //选项区县改变
-            $($ul).siblings().css({
-                'transform': 'translateY(0)',
-                'transition': 'all .1s'
-            });
-            this.curpos[1] = 0;
-            this.curpos[2] = 0;
+        sel(e, index) {
+            //chuli(curpos,index)
         },
-        selc($event, el, id) {
-            var ind = $($event.target).index();
-            var $ul = $event.target.parentElement;
-            var mpos = 34 * (ind - 2);
-            this.curpos[0] = -mpos;
-            $($ul).css({
-                'transform': 'translateY(' + (this.curpos[0]) + 'px)',
-                'transition': 'all .1s'
-            });
-            this.temsel.city = el //选项市改变
-            this.district = this.alldata.district[id]
-            this.temsel.district = this.district[0].name //选项区县改变
-            $($ul).siblings('.district').css({
-                'transform': 'translateY(0)',
-                'transition': 'all .1s'
-            });
-            this.curpos[2] = 0;
+        chuli(curpos,index) {
+            
         },
-        seld($event, el) {
-            var ind = $($event.target).index();
-            var $ul = $event.target.parentElement;
-            var mpos = 34 * (ind - 2);
-            this.curpos[0] = -mpos;
-            $($ul).css({
-                'transform': 'translateY(' + (this.curpos[0]) + 'px)',
-                'transition': 'all .1s'
-            });
-            this.temsel.district = el //选项区县改变
-        },
-        chuli() {
+        close() {
+            console.log(this.num)
             this.show = !this.show;
             this.address = this.temsel
-            
         }
     },
-    mounted() {}
+    mounted() {
+
+    }
 };
 </script>
 <style scoped>
@@ -341,6 +232,11 @@ export default {
 
 
 
+
+
+
+
+
 /*遮罩動畫*/
 
 .fade-enter-active,
@@ -354,6 +250,11 @@ export default {
     opacity: 0;
     visibility: hidden;
 }
+
+
+
+
+
 
 
 
