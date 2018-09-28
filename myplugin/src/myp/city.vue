@@ -102,7 +102,7 @@ export default {
             this.curpos[index] = -mpos;
             lastxh =Math.abs (parseInt(this.curpos[index] / 34));
             this.chuli(index,lastxh)
-            
+
 
         },
         chuli(index,lastxh) {
