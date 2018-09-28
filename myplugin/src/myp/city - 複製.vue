@@ -127,6 +127,8 @@ export default {
                         this.temsel.city = allli.eq(lastxh + 2).text()
                         nid = allli.eq(lastxh + 2).attr('tid')
                         this.district = this.alldata.district[nid]
+                        this.temsel.district = this.district[0].name
+                        console.log(this.district[0].name)
                         $($ul).siblings('.district').css({
                             'transform': 'translateY(0)',
                             'transition': 'all .1s'
