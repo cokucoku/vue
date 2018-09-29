@@ -1,4 +1,4 @@
-callback({
+var allcity={
 	"province" : [{
 			"id" : 110000,
 			"name" : "北京"
@@ -11267,4 +11267,5 @@ callback({
 			}
 		]
 	}
-});
+}
+export  default allcity

@@ -47,16 +47,16 @@ export default {
             this.whichcity = this.$citysel().city || this.whichcity;
             //return p + "/" + c + "/" + d || ''
             var _self = this;
-            $.ajax({
-                url: '/open/api/weather/json.shtml',
-                type: 'get',
-                dataType: 'json',
-                data: { city: _self.whichcity },
-                //data: {city:_self.$citysel().city},
-                success: function(ds) {
-                    //_self.mydata = ds.data.forecast
-                }
-            })
+            // $.ajax({
+            //     url: '/open/api/weather/json.shtml',
+            //     type: 'get',
+            //     dataType: 'json',
+            //     data: { city: _self.whichcity },
+            //     //data: {city:_self.$citysel().city},
+            //     success: function(ds) {
+            //         //_self.mydata = ds.data.forecast
+            //     }
+            // })
 
         }
     },

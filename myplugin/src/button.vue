@@ -9,7 +9,10 @@
             <lee-button type="danger">危险按钮</lee-button>
         </div>
         <div id="InputNumber">
-            <lee-input-number v-model="num1" @change="handleChange"  :min="3" :max="16" label="描述文字"></lee-input-number>{{num1}}
+            <lee-input-number v-model="num1" @change="handleChange" :min="3" :max="16" label="描述文字"></lee-input-number>{{num1}}
+        </div>
+        <div id="passwordInput">
+            <lee-password-input @change="yourpassword" :visible.async="kg" :pass="password"></lee-password-input>
         </div>
     </div>
 </template>
@@ -18,18 +21,21 @@ export default {
     name: "app",
     data() {
         return {
-            num1:135
+            num1: 135,
+            password: '147853',
+            kg: true
         }
     },
-    mounted() {
-
-    },
+    mounted() {},
     computed: {
 
     },
     methods: {
         handleChange(value) {
             console.log(value);
+        },
+        yourpassword(value) {
+            console.log(value)//value为1是密码正确 -1为密码错误
         }
     }
 };
