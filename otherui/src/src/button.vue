@@ -1,5 +1,5 @@
 <template>
-    <button type="button" :class="['lee-button','lee-button-'+type]">
+    <button type="button" :class="['lee-button','lee-button-'+type]" v-on="buttonListeners">
         <span><slot></slot></span>
     </button>
 </template>
@@ -7,13 +7,23 @@
 export default {
     data() {
         return {
-            
+
         };
     },
     props: {
         type: {
             type: String,
             default: 'default' //默认default
+        }
+    },
+    computed: {
+        buttonListeners() {
+            var vm = this;
+            return Object.assign({}, this.$listeners, {
+                click: function(event) {
+                    vm.$emit('click', event);
+                }
+            })
         }
     }
 };
@@ -48,21 +58,25 @@ export default {
     background-color: #409eff;
     border-color: #409eff;
 }
+
 .lee-button-success {
     color: #fff;
     background-color: #67c23a;
     border-color: #67c23a;
 }
+
 .lee-button-info {
     color: #fff;
     background-color: #909399;
     border-color: #909399;
 }
+
 .lee-button-warning {
     color: #fff;
     background-color: #e6a23c;
     border-color: #e6a23c;
 }
+
 .lee-button-danger {
     color: #fff;
     background-color: #f56c6c;
