@@ -1,39 +1,32 @@
 <template>
     <div id="rapp">
-        <nav>
-            <ul>
-                <myli href="/">Home</myli>
-                <myli href="/about">About</myli>
-            </ul>
-        </nav>
-        <slot>{{ViewComponent}}</slot>
+        <div class="nav">
+            <router-link to="/home">Home</router-link>
+            <router-link to="/about">About</router-link>
+            <router-link :to="{ name: 'user', params: { username: 'coku' }}">coku</router-link>
+            <router-link :to="{ name: 'user', params: { username: 'admin' }}">admin</router-link>
+        </div>
+        <transition :name="transitionName" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 <script>
-
-import Myli from './components/Myli.vue'
 export default {
-    components: {
-        Myli
-    },
     data() {
         return {
-            cururl: location.pathname,
-            router: {'/': './components/page/Home.vue','/about': './components/page/About.vue'
-            }
+            transitionName: '',
+
         }
     },
-    computed: {
-        ViewComponent() {
-            return this.router[this.cururl]
-            //return "mypagessss"
+    watch: {
+        '$route'(to, from) {
+            const toDepth = to.path.split('/').length
+            const fromDepth = from.path.split('/').length
+            this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
         }
-    },
-    //render: h => h('h1',["h111111111"])
+    }
 }
-window.addEventListener('popstate', () => {
-  //app.cururl = location.pathname
-})
 </script>
 <style>
 * {
@@ -42,24 +35,75 @@ window.addEventListener('popstate', () => {
     list-style: none;
 }
 
-#rapp {
-    margin: 20px auto;
-    background: #eee;
-    width: 60%;
-    padding: 20px;
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
 }
 
-nav li {
-    display: inline-block;
-    margin: 0 4px;
+#rapp .nav{position: fixed;left: 0;top: 0px;width: 100%;height: 40px;display: flex;align-items: center;justify-content: center;background: #fff}
+#rapp .nav a {
+  flex-grow: 1;
+  text-align: center
 }
 
-nav li a {
-    color: #999;
-    text-decoration: none
+.slide-left-enter-active {
+    animation: my-in .4s;
 }
 
-nav li a.on {
-    color: #f60
+.slide-left-leave-to {
+    animation: my-ll .1s;
+}
+
+.slide-right-enter-active {
+    animation: my-out .4s;
+}
+
+.slide-right-leave-to {
+    animation: my-lr .1s;
+}
+
+@keyframes my-in {
+    0% {
+
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes my-out {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
+
+    }
+}
+
+@keyframes my-ll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+
+    }
+}
+
+@keyframes my-lr {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+
+    }
 }
 </style>

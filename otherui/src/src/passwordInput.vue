@@ -33,7 +33,7 @@
 </template>
 <script>
 export default {
-    name: 'passwordinput',
+    name: 'LeePasswordInput',
     inheritAttrs: false,
     data() {
         return {

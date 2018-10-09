@@ -1,25 +1,25 @@
-import passwordInputvue from './src/passwordInput.vue'
-import inputNumbervue from './src/inputNumber.vue'
-import buttonvue from './src/button.vue'
-import payvue from './src/pay.vue'
-import cityvue from './src/city.vue'
+import passwordInput from './src/passwordInput.vue'
+import inputNumber from './src/inputNumber.vue'
+import button from './src/button.vue'
+import pay from './src/pay.vue'
+import city from './src/city.vue'
 import allcity from './src/allcity.js'
-var passwordInput = {};
-var inputNumber = {};
-var button = {};
-var pay = {};
-var city = {};
+import badge from './src/badge.vue'
+import collapse from './src/collapse.vue'
+import collapseItem from './src/collapseItem.vue'
+import alert from './src/alert.vue'
+import pagination from './src/pagination.vue'
 passwordInput.install = function(Vue) {
-    Vue.component('password-input', passwordInputvue)
+    Vue.component(passwordInput.name, passwordInput)
 }
 inputNumber.install = function(Vue) {
-    Vue.component('input-number', inputNumbervue)
+    Vue.component(inputNumber.name, inputNumber)
 }
 button.install = function(Vue) {
-    Vue.component('lee-button', buttonvue)
+    Vue.component(button.name, button)
 }
 pay.install = function(Vue) {
-    const payConstructor = Vue.extend(payvue)
+    const payConstructor = Vue.extend(pay)
     const instance = new payConstructor();
     instance.$mount(document.createElement('div'))
     document.body.appendChild(instance.$el)
@@ -34,7 +34,7 @@ pay.install = function(Vue) {
     }
 }
 city.install = function(Vue) {
-    const cityConstructor = Vue.extend(cityvue)
+    const cityConstructor = Vue.extend(city)
     // 生成一个该子类的实例
     const instance = new cityConstructor();
     instance.$mount(document.createElement('div'))
@@ -60,4 +60,19 @@ city.install = function(Vue) {
         return instance.address
     }
 }
-export {passwordInput,inputNumber,button,pay,city}
+badge.install = function(Vue) {
+    Vue.component(badge.name, badge)
+}
+collapse.install = function(Vue) {
+    Vue.component(collapse.name, collapse)
+}
+collapseItem.install = function(Vue) {
+    Vue.component(collapseItem.name, collapseItem)
+}
+alert.install = function(Vue) {
+    Vue.component(alert.name, alert)
+}
+pagination.install = function(Vue) {
+    Vue.component(pagination.name, pagination)
+}
+export {passwordInput,inputNumber,button,pay,city,badge,collapse,collapseItem,alert,pagination}

@@ -9,6 +9,7 @@
 </template>
 <script>
 export default {
+    name: 'LeeInputNumber',
     inheritAttrs: false,
     data() {
         return {

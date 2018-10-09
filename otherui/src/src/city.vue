@@ -37,6 +37,7 @@
 <script>
 import $ from 'jquery'
 export default {
+    name: 'LeeCity',
     data() {
         return {
             show: false,
