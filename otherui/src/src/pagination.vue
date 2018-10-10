@@ -6,16 +6,16 @@
             <li v-for="(item,inx) in pages" :class="{active:(inx+1)==cur}" @click="go">{{item}}</li>
         </ul>
         <div class="btn-next" :class="{disabled:cur==pages}" v-if="layout.indexOf('next')>-1" @click="next">下一页</div>
-         <div class="gopage" v-if="layout.indexOf('jumper')>-1">前往<lee-input v-model="cur"></lee-input>页</div>
+         <div class="gopage" v-if="layout.indexOf('jumper')>-1">前往<lee-input ref="input" v-model="cur" v-on="inputListeners"></lee-input>页</div>
         <!-- <div class="gopage" v-if="layout.indexOf('jumper')>-1">前往<input ref="input" :value="cur" v-on="inputListeners" />页</div> -->
     </div>
 </template>
 <script>
-import input from './input.vue'
+import Input from './input.vue'
 
 export default {
     components:{
-        input
+        Input
     },
     name: 'LeePagination',
     data() {
@@ -59,9 +59,10 @@ export default {
                     }
                     if (jg >= vm.pages) jg = vm.pages;
                     if (jg <= 1) jg = 1;
-                    vm.$refs.input.value = jg;
+                    vm.$refs.input.$refs.input.value = jg;
                     vm.$emit('change', jg)
                     vm.$emit('update:currentPage', jg)
+
                 }
             })
         }
@@ -70,6 +71,7 @@ export default {
         currentPage: {
             immediate: true,
             handler(value) {
+                var value = Number(event.target.value)
                 if (value <= 1) {
                     value = 1
                 } else if (value >= this.pages) {
