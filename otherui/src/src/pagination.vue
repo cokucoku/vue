@@ -6,7 +6,7 @@
             <li v-for="(item,inx) in pages" :class="{active:(inx+1)==cur}" @click="go">{{item}}</li>
         </ul>
         <div class="btn-next" :class="{disabled:cur==pages}" v-if="layout.indexOf('next')>-1" @click="next">下一页</div>
-         <div class="gopage" v-if="layout.indexOf('jumper')>-1">前往<lee-input ref="input" v-model="cur" v-on="inputListeners"></lee-input>页</div>
+        <div class="gopage" v-if="layout.indexOf('jumper')>-1">前往<lee-input ref="input" v-model="cur" @change="chanage"></lee-input>页</div>
         <!-- <div class="gopage" v-if="layout.indexOf('jumper')>-1">前往<input ref="input" :value="cur" v-on="inputListeners" />页</div> -->
     </div>
 </template>
@@ -14,7 +14,7 @@
 import Input from './input.vue'
 
 export default {
-    components:{
+    components: {
         Input
     },
     name: 'LeePagination',
@@ -42,42 +42,36 @@ export default {
             if (this.cur >= this.pages) this.cur = this.pages
             this.$emit('change', this.cur)
             this.$emit('update:currentPage', this.cur)
+        },
+        chanage(value) {
+            var jg = Number(value)
+            if (isNaN(jg)) {
+                jg = this.cur
+            }
+            if (jg >= this.pages) jg = this.pages;
+            if (jg <= 1) jg = 1;
+            this.$refs.input.$refs.input.value = jg;
+            this.$emit('change')
+            this.$emit('update:currentPage', jg)
         }
 
     },
     computed: {
         pages() {
             return Math.ceil(this.total / this.PageSize)
-        },
-        inputListeners() {
-            var vm = this;
-            return Object.assign({}, this.$listeners, {
-                change: function(event) {
-                    var jg = Number(event.target.value)
-                    if (isNaN(jg)) {
-                        jg = vm.cur
-                    }
-                    if (jg >= vm.pages) jg = vm.pages;
-                    if (jg <= 1) jg = 1;
-                    vm.$refs.input.$refs.input.value = jg;
-                    vm.$emit('change', jg)
-                    vm.$emit('update:currentPage', jg)
-
-                }
-            })
         }
     },
     watch: {
         currentPage: {
             immediate: true,
             handler(value) {
-                var value = Number(event.target.value)
                 if (value <= 1) {
                     value = 1
                 } else if (value >= this.pages) {
                     value = this.pages;
                 }
                 this.cur = value
+                this.$emit('input', value);
             }
         },
         // cur: {
@@ -110,9 +104,18 @@ export default {
 };
 </script>
 <style>
-.lee-pagination .gopage{margin-left: 15px}
-.lee-pagination .tjtotal{margin-right: 15px}
-.lee-pagination .gopage .lee-input{width: auto}
+.lee-pagination .gopage {
+    margin-left: 15px
+}
+
+.lee-pagination .tjtotal {
+    margin-right: 15px
+}
+
+.lee-pagination .gopage .lee-input {
+    width: auto
+}
+
 .lee-pagination .gopage input {
     height: 21px;
     width: 50px;
@@ -121,7 +124,11 @@ export default {
     margin: 0 4px;
     text-align: center;
 }
-.lee-pagination .gopage input:focus{border-color: #409eff}
+
+.lee-pagination .gopage input:focus {
+    border-color: #409eff
+}
+
 .lee-pagination .btn-prev,
 .lee-pagination .btn-next,
 .lee-pagination .lee-pager,
@@ -132,7 +139,11 @@ export default {
     cursor: pointer;
     user-select: none
 }
-.lee-pagination .more{display: inline-block;}
+
+.lee-pagination .more {
+    display: inline-block;
+}
+
 .lee-pagination .btn-prev,
 .lee-pagination .btn-next {
     background: #eee;
@@ -152,7 +163,12 @@ export default {
     cursor: default;
     /*pointer-events: none*/
 }
-.lee-pagination .lee-pager{margin:0px;padding:0px;} 
+
+.lee-pagination .lee-pager {
+    margin: 0px;
+    padding: 0px;
+}
+
 .lee-pagination .lee-pager li {
     display: inline-block;
     padding: 3px 6px;

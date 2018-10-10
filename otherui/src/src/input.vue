@@ -25,6 +25,9 @@ export default {
                 // 这里确保组件配合 `v-model` 的工作
                 input: function(event) {
                     vm.$emit('input', event.target.value);
+                },
+                change: function(event) {
+                    vm.$emit('change', event.target.value);
                 }
             })
         }
