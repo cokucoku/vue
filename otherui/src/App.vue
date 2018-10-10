@@ -1,13 +1,17 @@
 <template>
-    <lee-pagination :page-size="20" layout="prev, pager, next" :total="150" @change="curpage">
-    </lee-pagination>
+    <lee-input-number v-model="num" @change="handleChange" :min="3" :max="16" label="描述文字"></lee-input-number>
 </template>
 <script>
 export default {
+    data() {
+        return {
+            num: 135 //input-number的值
+        };
+    },
     methods: {
-        curpage(val) {
-        console.log('当前页:'+val);
-      }
+        handleChange(value) { //input-number返回的数值
+            console.log(value);
+        }
     }
 }
 </script>

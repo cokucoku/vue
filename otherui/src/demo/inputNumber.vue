@@ -1,5 +1,5 @@
 <template>
-    <input-number v-model="num" @change="handleChange" :min="3" :max="16" label="描述文字"></input-number>
+    <lee-input-number v-model="num" @change="handleChange" :min="3" :max="16" label="描述文字"></lee-input-number>
 </template>
 <script>
 export default {

@@ -1,5 +1,5 @@
 <template>
-    <password-input @change="yourpassword" :visible.async="kg" :pass="password"></password-input>
+    <lee-password-input @change="yourpassword" :visible.async="kg" :pass="password"></lee-password-input>
 </template>
 <script>
 export default {

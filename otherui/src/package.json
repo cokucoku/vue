@@ -1,17 +1,17 @@
 {
   "name": "leevueplugin",
-  "version": "1.0.0",
-  "description": "按钮，交易密码输入框，城市联动选择，支付选择，数量选择输入框",
+  "version": "1.0.6",
+  "description": "数量选择输入框，支付密码输入框，支付选择，城市联动选择,警示栏，分页，自定义按钮",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cokucoku/vueplugin"
+    "url": ""
   },
   "keywords": [
-    "按钮，交易密码输入框，城市联动选择，支付选择，数量选择输入框"
+    "数量选择输入框，支付密码输入框，支付选择，城市联动选择,警示栏，分页，自定义按钮"
   ],
   "author": "34832462@qq.com",
   "license": "ISC"
