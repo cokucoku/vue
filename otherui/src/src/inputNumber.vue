@@ -1,9 +1,9 @@
 <template>
-    <div class="el-input-number">
-        <span role="button" class="el-input-number_decrease" :class="{'is-disabled':currentValue<=min?true:false}" @click="dec"><i>-</i></span>
-        <span role="button" class="el-input-number_increase" :class="{'is-disabled':currentValue>=max?true:false}" @click="inc"><i>+</i></span>
-        <div class="el-input">
-            <input ref="input" type="text" v-bind="$attrs" class="el-input_inner" :value="currentValue" v-on="inputListeners">
+    <div class="lee-input-number">
+        <span role="button" class="lee-input-number_decrease" :class="{'is-disabled':currentValue<=min?true:false}" @click="dec"><i>-</i></span>
+        <span role="button" class="lee-input-number_increase" :class="{'is-disabled':currentValue>=max?true:false}" @click="inc"><i>+</i></span>
+        <div class="lee-input">
+            <input ref="input" type="text" v-bind="$attrs" class="lee-input_inner" :value="currentValue" v-on="inputListeners">
         </div>
     </div>
 </template>
@@ -95,15 +95,15 @@ export default {
 };
 </script>
 <style>
-.el-input-number {
+.lee-input-number {
     position: relative;
     display: inline-block;
     width: 180px;
     line-height: 38px;
 }
 
-.el-input-number_decrease,
-.el-input-number_increase {
+.lee-input-number_decrease,
+.lee-input-number_increase {
     position: absolute;
     z-index: 1;
     top: 1px;
@@ -116,26 +116,26 @@ export default {
     font-size: 13px;
 }
 
-.el-input-number_decrease {
+.lee-input-number_decrease {
     left: 1px;
     border-radius: 4px 0 0 4px;
     border-right: 1px solid #dcdfe6;
 }
 
-.el-input-number_increase {
+.lee-input-number_increase {
     right: 1px;
     border-radius: 0 4px 4px 0;
     border-left: 1px solid #dcdfe6;
 }
 
-.el-input {
+.lee-input {
     position: relative;
     font-size: 14px;
     display: inline-block;
     width: 100%;
 }
 
-.el-input_inner {
+.lee-input_inner {
     -webkit-appearance: none;
     background-color: #fff;
     background-image: none;
@@ -153,15 +153,15 @@ export default {
     width: 100%;
 }
 
-.el-input-number .el-input_inner {
+.lee-input-number .lee-input_inner {
     -webkit-appearance: none;
     padding-left: 50px;
     padding-right: 50px;
     text-align: center;
 }
 
-.el-input-number_decrease.is-disabled,
-.el-input-number_increase.is-disabled {
+.lee-input-number_decrease.is-disabled,
+.lee-input-number_increase.is-disabled {
     color: #c0c4cc;
     cursor: not-allowed;
     /*pointer-events: none;*/

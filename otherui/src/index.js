@@ -1,3 +1,4 @@
+import input from './src/input.vue'
 import passwordInput from './src/passwordInput.vue'
 import inputNumber from './src/inputNumber.vue'
 import button from './src/button.vue'
@@ -9,6 +10,9 @@ import collapse from './src/collapse.vue'
 import collapseItem from './src/collapseItem.vue'
 import alert from './src/alert.vue'
 import pagination from './src/pagination.vue'
+input.install = function(Vue) {
+    Vue.component(input.name, input)
+}
 passwordInput.install = function(Vue) {
     Vue.component(passwordInput.name, passwordInput)
 }
@@ -75,4 +79,4 @@ alert.install = function(Vue) {
 pagination.install = function(Vue) {
     Vue.component(pagination.name, pagination)
 }
-export {passwordInput,inputNumber,button,pay,city,badge,collapse,collapseItem,alert,pagination}
+export {input,passwordInput,inputNumber,button,pay,city,badge,collapse,collapseItem,alert,pagination}
