@@ -1,6 +1,7 @@
 <template>
     <div class="lee-input">
-        <input ref="input" type="text" v-bind="$attrs" class="lee-input_inner" :value="value" v-on="inputListeners">
+        <!-- <input ref="input" type="text" v-bind="$attrs" class="lee-input_inner" :value="value" v-on="inputListeners"> -->
+        <input ref="input" type="text" v-bind="$attrs" class="lee-input_inner" :value="value" @input="handleInput" @change="handleChange">
     </div>
 </template>
 <script>
@@ -15,9 +16,18 @@ export default {
     props: {
         value: {
             type: [Number,String],
-            default: '' //默认1
+            //default: '' //默认1
         }
     },
+    methods:{
+        handleInput(event){
+            this.$emit('input', event.target.value);
+        },
+        handleChange(event){
+            this.$emit('change', event.target.value);
+        }
+    }
+    ,
     computed: {
         inputListeners() {
             var vm = this;

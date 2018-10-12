@@ -6,14 +6,14 @@
 export default {
     data() {
         return {
-            currentPage: 123
+            currentPage: 5
         }
     },
     methods: {
         curpage(val) {
             //console.log('当前页:'+this.currentPage);
             this.$nextTick(function() {
-                console.log('当前页:'+this.currentPage);//终于知道怎么用nextTick了
+                console.log('当前页:' + this.currentPage); //终于知道怎么用nextTick了
             })
         }
     }

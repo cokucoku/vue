@@ -6,7 +6,7 @@
             <li v-for="(item,inx) in pages" :class="{active:(inx+1)==cur}" @click="go">{{item}}</li>
         </ul>
         <div class="btn-next" :class="{disabled:cur==pages}" v-if="layout.indexOf('next')>-1" @click="next">下一页</div>
-        <div class="gopage" v-if="layout.indexOf('jumper')>-1">前往<lee-input ref="input" v-model="cur" @change="chanage"></lee-input>页</div>
+        <div class="gopage" v-if="layout.indexOf('jumper')>-1">前往<lee-input ref="input" :value="cur" @change="handlerchanage"></lee-input>页</div>
         <!-- <div class="gopage" v-if="layout.indexOf('jumper')>-1">前往<input ref="input" :value="cur" v-on="inputListeners" />页</div> -->
     </div>
 </template>
@@ -43,7 +43,7 @@ export default {
             this.$emit('change', this.cur)
             this.$emit('update:currentPage', this.cur)
         },
-        chanage(value) {
+        handlerchanage(value) {
             var jg = Number(value)
             if (isNaN(jg)) {
                 jg = this.cur

@@ -2,9 +2,7 @@
     <div class="lee-input-number">
         <span role="button" class="lee-input-number_decrease" :class="{'is-disabled':currentValue<=min?true:false}" @click="dec"><i>-</i></span>
         <span role="button" class="lee-input-number_increase" :class="{'is-disabled':currentValue>=max?true:false}" @click="inc"><i>+</i></span>
-        <div class="lee-input">
-            <input ref="input" type="text" v-bind="$attrs" class="lee-input_inner" :value="currentValue" v-on="inputListeners">
-        </div>
+        <lee-input :value="currentValue" @change="handlerchange"></lee-input>
     </div>
 </template>
 <script>
@@ -51,7 +49,8 @@ export default {
             this.$emit('input', this.currentValue);
             this.$emit('change', this.currentValue);
 
-        }
+        },
+        
     },
     watch: {
         value: {
