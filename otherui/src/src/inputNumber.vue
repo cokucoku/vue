@@ -2,7 +2,7 @@
     <div class="lee-input-number">
         <span role="button" class="lee-input-number_decrease" :class="{'is-disabled':currentValue<=min?true:false}" @click="dec"><i>-</i></span>
         <span role="button" class="lee-input-number_increase" :class="{'is-disabled':currentValue>=max?true:false}" @click="inc"><i>+</i></span>
-        <lee-input :value="currentValue" @change="handlerchange"></lee-input>
+        <lee-input ref="input" :value="currentValue" @change="handlerchange"></lee-input>
     </div>
 </template>
 <script>
@@ -50,7 +50,18 @@ export default {
             this.$emit('change', this.currentValue);
 
         },
-        
+        handlerchange(value) {
+            var jg = Number(value)
+            if (isNaN(jg)) {
+                jg = this.currentValue
+            }
+            if (jg >= this.max) jg = this.max;
+            if (jg <= this.min) jg = this.min;
+            this.$refs.input.$refs.input.value = jg;
+            this.$emit('change',jg)
+            this.$emit('input',jg)
+        }
+
     },
     watch: {
         value: {
