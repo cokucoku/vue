@@ -1,6 +1,6 @@
 <template>
-    <div class="lee-collapse">
-        <slot></slot>
+    <div class="lee-collapse">{{activeNames}}
+        <slot @change="handleItemClick"></slot>
     </div>
 </template>
 <script>
@@ -17,8 +17,7 @@ export default {
         };
     },
     mounted() {
-        //this.$on('item-click', this.handleItemClick);
-        //console.log(this)
+        
     },
     props: {
         value: {
@@ -29,8 +28,8 @@ export default {
         }
     },
     methods: {
-        handleItemClick(item) {
-            console.log(item)
+        handleItemClick(val) {
+            console.log(val)
         }
 
     }
