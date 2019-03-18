@@ -4,23 +4,39 @@ import VueRouter from 'vue-router'
 import About from './page/About.vue'
 import Home from './page/Home.vue'
 import User from './page/User.vue'
+import UserIndex from './page/UserIndex.vue'
 import Nofound from './page/Nofound.vue'
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 
 const routes = [
-    // { path: '/(?)', component: Nofound },
-    { path: '/user/:username', component: User, name: 'user', meta: { title: '用户中心' } },
+    { path: '*', component: Nofound },
+    {
+        path: '/user',
+        component: UserIndex,
+        name: 'user',
+        meta: { title: '用户中心' }
+    },
+    {
+        path: '/user/:username',
+        component: User,
+        name: 'userto',
+        //meta: { title: '用户中心' }
+    },
     { path: '/', component: Home, meta: { title: '首页' } },
     { path: '/home', component: Home, meta: { title: '首页' } },
     { path: '/about', component: About, meta: { title: '关于我们' } }
 ]
 const router = new VueRouter({
+     mode: 'history',
+     base:'/app',
     routes, // (缩写) 相当于 routes: routes
-   
+
+
 })
+
 router.afterEach((to, from, next) => {
-    //console.log(to)
+
     var home = new RegExp('/home');
     var about = new RegExp('/about');
     var result1 = home.test(to.path);
@@ -31,7 +47,7 @@ router.afterEach((to, from, next) => {
     if (result2) {
         document.body.bgColor = "#f00"
     }
-    window.document.title = to.meta.title
+    window.document.title = to.meta.title||to.params.username
 })
 
 new Vue({

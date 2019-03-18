@@ -40,6 +40,7 @@ export default {
         }
     },
     beforeCreate() {
+        console.log(this.leeapi)
         var _self = this;
         var query = '34832462'
         var obj = { 'city': '北京' }

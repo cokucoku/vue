@@ -26,6 +26,27 @@ import Swiper from 'swiper'
 export default {
     name: 'aboutapp',
     mounted() {
+        var postdata = {
+            area: 'pudong'
+        }
+        var postdata1 = {
+            count: 2
+        }
+        this.leeapi('/201306/ajax.php', 'post', postdata).then((response) => {
+            console.log(response.data)
+        })
+        this.leeapi('/top250', 'post', postdata1).then((response) => {
+            console.log(response.data)
+        })
+        this.leeapi('/api/qqmusic/34832462', 'get').then((response) => {
+            console.log(response.data.data)
+        })
+        this.leeapi('/api/beian/www.leeao82.com', 'get').then((response) => {
+            console.log(response.data)
+        })
+        this.leeapi('/toutiao/index', 'get',{type:'top',key:'0e6a8735724704143e51390eb86394c3'}).then((response) => {
+            console.log(response.data.result.data)
+        })
         new Swiper('.swiper-container', {
             autoplay: {
                 delay: 2000,
@@ -44,10 +65,12 @@ body {
     position: relative;
     height: 100%;
 }
+
 .swiper-container,
 #app {
     width: 100%;
     height: 100%;
 }
+
 @import url(./assets/swiper.min.css)
 </style>

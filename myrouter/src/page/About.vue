@@ -1,5 +1,5 @@
 <template>
-	<div style="margin-top: 40px">
+	<div style="margin-top: 40px;min-height: 1560px;">
     <p>这是ABOUT页面</p>
 </div>
 

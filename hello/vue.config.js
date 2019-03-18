@@ -130,6 +130,11 @@ module.exports = {
                 target: 'https://www.zhangxinxu.com/study',//好像我猜測這個一定404
                 ws: true,
                 changeOrigin: true,
+            },
+            '/toutiao': {
+                target: 'http://v.juhe.cn/',//好像我猜測這個一定404
+                ws: true,
+                changeOrigin: true,
             }
         }
     }
