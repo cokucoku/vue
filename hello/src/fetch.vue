@@ -28,6 +28,10 @@
                 </li>
             </ul>
         </div>
+        <div class="leevueplugin">
+           <lee-badge title="站内信息" info="8"/>
+<lee-badge title="购物车" info="99"  color="#fc0"/>
+        </div>
     </div>
 </template>
 <script>
@@ -37,7 +41,12 @@ export default {
         return {
             fang: '',
             music: '',
+            
         }
+    },
+    methods:{
+        
+
     },
     beforeCreate() {
         console.log(this.leeapi)
@@ -118,19 +127,22 @@ export default {
 }
 
 #fang dt:nth-child(1),
-#fang li div:nth-child(1),#music dt:nth-child(1),
+#fang li div:nth-child(1),
+#music dt:nth-child(1),
 #music li div:nth-child(1) {
     width: 20%
 }
 
 #fang dt:nth-child(2),
-#fang li div:nth-child(2),#music dt:nth-child(2),
+#fang li div:nth-child(2),
+#music dt:nth-child(2),
 #music li div:nth-child(2) {
     width: 20%
 }
 
 #fang dt:nth-child(3),
-#fang li div:nth-child(3),#music dt:nth-child(3),
+#fang li div:nth-child(3),
+#music dt:nth-child(3),
 #music li div:nth-child(3) {
     width: 60%
 }
