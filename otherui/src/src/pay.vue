@@ -33,6 +33,7 @@ export default {
         chuli(){
             this.show=!this.show;
             this.pay=this.tempay
+            
 
         }
     }

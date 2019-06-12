@@ -46,6 +46,3 @@ export default {
     }
 };
 </script>
-<style scoped>
-@import '../assets/css.css'; /*引入公共样式*/
-</style>

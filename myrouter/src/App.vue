@@ -3,8 +3,8 @@
         <div class="nav">
             <router-link to="/home" tag="li" active-class="on"><a>Home</a></router-link>
             <router-link to="/about" active-class="on">About</router-link>
-            <router-link :to="{ name: 'user', params: { username: '' }}" active-class="on">用户中心</router-link>
-            <router-link :to="{ name: 'userto', params: { username: 'admin' }}" active-class="on">admin</router-link>
+            <router-link :to="{ name: 'user'}" active-class="on">用户中心</router-link>
+            <router-link :to="{ name: 'userto', params: { username: 'cokucoku' }}" active-class="on">cokucoku</router-link>
             <router-link :to="{ name: 'userto', params: { username: 'LEEAO' }}" active-class="on">LEEAO</router-link>
         </div>
         <transition :name="transitionName" mode="out-in">
@@ -21,22 +21,13 @@ export default {
         }
     },
     mounted() {
-
-        //var a=[1,2,12,13,69,6,8,45]
-        // var b=a.sort(function (x,y) {
-        //     return x-y
-        // })
-        //转箭头函数
-        //var b=a.sort((x,y)=>x-y)
-        //console.log(b)
-
-
     },
     watch: {
         '$route'(to, from) {
             const toDepth = to.path.split('/').length
             const fromDepth = from.path.split('/').length
             this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+            
 
         }
     }
