@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import About from './page/About.vue'
+import Login from './page/Login.vue'
 //import Home from './page/Home.vue'
 const Home = () => import('./page/Home.vue')//路由懒加载
 import User from './page/User.vue'
@@ -15,6 +16,7 @@ Vue.use(VueRouter)
 
 const routes = [
     { path: '*', component: Nofound },
+    { path: '/login', component: Login },
     { path: '/a', redirect: { name: 'user' } }, //重定向和别名
     {
         path: '/user',

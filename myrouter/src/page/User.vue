@@ -25,6 +25,12 @@ export default {
                 console.log(myJson)
                 if(myJson.answer=='no'){
                   vm.login=false
+                  setTimeout(function () {
+                    console.log("gogo")
+                      next({
+                        path: '/login'
+                    })
+                  },2000)
 
                 }else{
                    vm.login=true
@@ -44,6 +50,12 @@ export default {
                 console.log(myJson)
                 if(myJson.answer=='no'){
                   _this.login=false
+                  setTimeout(function () {
+                    console.log("gogo")
+                      next({
+                        path: '/login'
+                    })
+                  },2000)
 
                 }else{
                    _this.login=true
