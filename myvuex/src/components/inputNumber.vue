@@ -5,7 +5,8 @@
             <input type="text" :value="count" @input="update">
             <button @click="decrement">-</button>
         </div>
-        <div class="user" v-if="login">{{user}} <a href="#" @click="out">登出</a></div>
+        <div v-cloak class="user" v-if="login&&login!=null">{{user}} <a href="#" @click="loginout">登出</a></div>
+        <div v-cloak  class="user" v-if="!login&&login!=null">您好，游客。<a href="#" @click="loginin">立即登录</a></div>
         <div class="todos">
             <ul>
                 <li v-for="todo in donetodos">{{todo.text}}</li>
@@ -19,20 +20,21 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
 import { mapState } from 'vuex' //辅助函数
 import { mapGetters } from 'vuex' //辅助函数
 export default {
     computed: {
         ...mapState({
             count: function(state) { return state.count }, //函数写法
-            user: state => state.user,
-            login: state => state.login
+            //user: state => state.user,
+            user: 'user',
+            login: 'login'
         }),
         ...mapGetters({
             // 把 `this.doneCount` 映射为 `this.$store.getters.doneTodosCount`
             donetodos: 'doneTodos',
-            doneCount: 'doneTodosCount'
+            doneCount: 'doneTodosCount',
+            //doneGetById: 'getTodoById',
         }),
         // todos() {
         //     return this.$store.getters.doneTodos
@@ -40,48 +42,51 @@ export default {
         // doneTodosCount() {
         //     return this.$store.getters.doneTodosCount
         // },
-        doneGetById(){
-            return this.$store.getters.getTodoById(2)
+        doneGetById() {
+            return this.$store.getters.getTodoById(3)
         }
         // user() {
         //     return this.$store.state.user
         // }
     },
     mounted() {
-        
         var _this = this
-        axios({
-            method: 'get',
-            url: 'http://localhost:81/api/fang.asp',
-            params: { area: 'pudong' }
-        }).then(function(res) {
-            if (res.status == 200) {
-                _this.in()
-
-            }
-        });
+        fetch('https://yesno.wtf/api')//判断是否登录 模拟
+            .then(function(response) {
+                if (response.ok) {
+                    return response.json();
+                }
+            })
+            .then(function(myJson) {
+                if (myJson.answer == 'no') {
+                  _this.loginout()
+                } else {
+                  _this.loginin() 
+                }
+            });
     },
     methods: {
         increment() {
             //this.$store.commit('increment',4)
-            var a=this.$store.dispatch('jia',15)
+            var a = this.$store.dispatch('jia', 15)
             console.log(a)
         },
         decrement() {
-            this.$store.commit('decrement',2)
+            this.$store.commit('decrement', 2)
         },
-        out() {
+        loginout() {
             this.$store.commit('out')
         },
-        in () {
+        loginin() {
             this.$store.commit('in')
         },
-        update(e){
-            var v=Number(e.target.value)
-            this.$store.commit('update',v)
+        update(e) {
+            var v = Number(e.target.value)
+            this.$store.commit('update', v)
         }
     }
 }
 </script>
 <style scoped>
+[v-cloak]{display: none}
 </style>

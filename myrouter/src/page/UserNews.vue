@@ -14,7 +14,7 @@ export default {
             list: []
         }
     },
-    mounted() {
+    created() {
         var _this = this
         var username = this.$route.params.username
         fetch('https://my-json-server.typicode.com/' + username + '/jsonserver/news')

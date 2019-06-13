@@ -2,7 +2,6 @@
     <input-number></input-number>
 </template>
 <script>
-import axios from 'axios'
 import inputNumber from './components/inputNumber.vue'
 export default {
     name: 'app',

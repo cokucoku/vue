@@ -5,8 +5,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         count: 0,
-        login: false,
-        user: 'leeaos',
+        login: null,
+        user: 'leeaos333',
         todos: [
             { id: 1, text: 'Html5', done: true },
             { id: 2, text: 'Css3', done: true },
@@ -34,16 +34,16 @@ export default new Vuex.Store({
         }
     },
     getters: { //类似computed计算属性
-        doneTodos: state => {
+        doneTodos(state) {
             return state.todos.filter(todo => todo.done)
         },
-        doneTodosCount: (state, getters) => {
+        doneTodosCount(state, getters) {
             return getters.doneTodos.length
         },
         // getTodoById: (state) => (id) => {
         //     return state.todos.filter(todo => todo.id === id)
         // },
-        getTodoById: function(state) {
+        getTodoById(state) {
             return function(id) {
                 return state.todos.filter(function(todo) {
                     return todo.id === id
