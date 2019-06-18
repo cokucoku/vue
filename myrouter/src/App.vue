@@ -8,7 +8,9 @@
             <router-link :to="{ name: 'userto', params: { username: 'LEEAO' }}" active-class="on">LEEAO</router-link>
         </div>
         <transition :name="transitionName" mode="out-in">
-            <router-view></router-view>
+            <keep-alive include="About">
+                <router-view></router-view>
+            </keep-alive>
         </transition>
     </div>
 </template>
@@ -20,14 +22,13 @@ export default {
 
         }
     },
-    mounted() {
-    },
+    mounted() {},
     watch: {
         '$route'(to, from) {
             const toDepth = to.path.split('/').length
             const fromDepth = from.path.split('/').length
             this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-            
+
 
         }
     }

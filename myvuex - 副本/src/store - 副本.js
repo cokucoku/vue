@@ -24,10 +24,15 @@ export default new Vuex.Store({
             state.count -= n
         },
         out(state) {
+            var storage = window.localStorage
             state.login = false
+            storage.setItem('login', 0)
+
         },
         in (state) {
+            var storage = window.localStorage
             state.login = true
+            storage.setItem('login', 1)
         },
         update(state,value){
             state.count =value
@@ -52,9 +57,9 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        jia({ commit },n) {
+        jia({commit},opt) {
             setTimeout(() => {
-                commit('increment',n)
+                commit('increment',opt.amount)
             }, 1000)
         }
     }

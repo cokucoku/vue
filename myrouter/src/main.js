@@ -9,6 +9,7 @@ import User from './page/User.vue'
 import UserNews from './page/UserNews.vue'
 import UserTodos from './page/UserTodos.vue'
 import UserTodosDetails from './page/UserTodosDetails.vue'
+import UserNewsDetails from './page/UserNewsDetails.vue'
 import UserIndex from './page/UserIndex.vue'
 import Nofound from './page/Nofound.vue'
 Vue.config.productionTip = false
@@ -50,9 +51,19 @@ const routes = [
         component: UserTodosDetails,
         name: 'todoDetails'
     },
+    {
+        path: '/user/:username/news/:id',
+        component: UserNewsDetails,
+        name: 'newDetails'
+    },
     { path: '/', component: Home, meta: { title: '首页' } },
     { path: '/home', component: Home, meta: { title: '首页' } },
-    { path: '/about', component: About, meta: { title: '关于我们' } }
+    { path: '/about',component: About, meta: { title: '关于我们' } },
+    {
+        path: '/about/:id',
+        component: UserNewsDetails,
+        name: 'abnewDetails'
+    }
 ]
 const router = new VueRouter({
     mode: 'history',
