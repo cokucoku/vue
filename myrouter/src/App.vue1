@@ -1,0 +1,85 @@
+<template>
+    <div id="MyApp">
+        <div class="sidebar">
+            <ul class="sidebar-links">
+                <router-link to="/" tag="li"><a>安装</a></router-link>
+                <router-link to="/Alert" tag="li"><a>Alert 警告框</a></router-link>
+                <router-link to="/Badge" tag="li"><a>Badge 徽章</a></router-link>
+            </ul>
+        </div>
+        <div class="page">
+            <router-view></router-view>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            transitionName: '',
+
+        }
+    },
+    mounted() {}
+}
+</script>
+<style>
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+.sidebar {
+    font-size: 15px;
+    width: 20rem;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border-right: 1px solid #eaecef;
+    overflow-y: auto;
+}
+
+.sidebar .sidebar-links {
+    padding: 1.5rem 0;
+}
+
+.sidebar .sidebar-links li a {
+    font-weight: 400;
+    display: block;
+    text-decoration: none;
+    color: #2c3e50;
+    border-left: .25rem solid transparent;
+    padding: .35rem 1rem .35rem 2rem;
+    line-height: 1.4;
+    width: 100%;
+}
+
+.sidebar .sidebar-links li.router-link-exact-active a {
+    font-weight: 600;
+    color: #3eaf7c;
+    border-left-color: #3eaf7c;
+}
+
+.page {
+    padding-left: 20em
+}
+
+.container {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 2rem 2.5rem;
+}
+</style>

@@ -11,11 +11,43 @@
     	</ul>
     	<p>总：{{totaldotos}},已完成{{havedo}},未完成{{nohavedo}}</p>
     </div>
+    <div class="leevueplugin">
+        <!-- 测试插件地方 -->
+        <lee-select v-model="value" filterable placeholder="请选择">
+    <lee-option
+    v-for="item in options"
+    :key="item.value"
+    :label="item.label"
+    :value="item.value">
+    </lee-option>
+</lee-select>
+    </div>
 </div>
 </template>
 <script>
 export default {
     name: 'app',
+    data() {
+              return {
+                options: [{
+                  value: '选项1',
+                  label: 'Html'
+                }, {
+                  value: '选项2',
+                  label: 'Css3'
+                }, {
+                  value: '选项3',
+                  label: 'Javascript'
+                }, {
+                  value: '选项4',
+                  label: 'Vue'
+                }, {
+                  value: '选项5',
+                  label: 'React'
+                }],
+                value: ''
+              }
+          },
     mounted() {
     	
 

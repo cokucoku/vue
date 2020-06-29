@@ -1,36 +1,19 @@
 <template>
     <div id="rapp">
-        <div class="nav">
-            <router-link to="/home" tag="li" active-class="on"><a>Home</a></router-link>
-            <router-link to="/about" active-class="on">About</router-link>
-            <router-link :to="{ name: 'user'}" active-class="on">用户中心</router-link>
-            <router-link :to="{ name: 'userto', params: { username: 'cokucoku' }}" active-class="on">cokucoku</router-link>
-            <router-link :to="{ name: 'userto', params: { username: 'LEEAO' }}" active-class="on">LEEAO</router-link>
-        </div>
-        <transition :name="transitionName" mode="out-in">
-            <keep-alive include="About">
-                <router-view></router-view>
-            </keep-alive>
-        </transition>
+        <router-view></router-view>
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
-            transitionName: '',
+            photos: [{ "id": "0", "author": "Alejandro Escamilla", "width": 5616, "height": 3744, "url": "https://unsplash.com/photos/yC-Yzbqy7PY", "download_url": "https://picsum.photos/id/0/5616/3744" }, { "id": "1", "author": "Alejandro Escamilla", "width": 5616, "height": 3744, "url": "https://unsplash.com/photos/LNRyGwIJr5c", "download_url": "https://picsum.photos/id/1/5616/3744" }, { "id": "10", "author": "Paul Jarvis", "width": 2500, "height": 1667, "url": "https://unsplash.com/photos/6J--NXulQCs", "download_url": "https://picsum.photos/id/10/2500/1667" }, { "id": "100", "author": "Tina Rataj", "width": 2500, "height": 1656, "url": "https://unsplash.com/photos/pwaaqfoMibI", "download_url": "https://picsum.photos/id/100/2500/1656" }, { "id": "1000", "author": "Lukas Budimaier", "width": 5626, "height": 3635, "url": "https://unsplash.com/photos/6cY-FvMlmkQ", "download_url": "https://picsum.photos/id/1000/5626/3635" }, { "id": "1001", "author": "Danielle MacInnes", "width": 5616, "height": 3744, "url": "https://unsplash.com/photos/1DkWWN1dr-s", "download_url": "https://picsum.photos/id/1001/5616/3744" }, { "id": "1002", "author": "NASA", "width": 4312, "height": 2868, "url": "https://unsplash.com/photos/6-jTZysYY_U", "download_url": "https://picsum.photos/id/1002/4312/2868" }, { "id": "1003", "author": "E+N Photographies", "width": 1181, "height": 1772, "url": "https://unsplash.com/photos/GYumuBnTqKc", "download_url": "https://picsum.photos/id/1003/1181/1772" }, { "id": "1004", "author": "Greg Rakozy", "width": 5616, "height": 3744, "url": "https://unsplash.com/photos/SSxIGsySh8o", "download_url": "https://picsum.photos/id/1004/5616/3744" }, { "id": "1005", "author": "Matthew Wiebe", "width": 5760, "height": 3840, "url": "https://unsplash.com/photos/tBtuxtLvAZs", "download_url": "https://picsum.photos/id/1005/5760/3840" }]
+
 
         }
     },
-    mounted() {},
-    watch: {
-        '$route'(to, from) {
-            const toDepth = to.path.split('/').length
-            const fromDepth = from.path.split('/').length
-            this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+    mounted() {
 
-
-        }
     }
 }
 </script>
@@ -45,82 +28,5 @@ html,
 body {
     width: 100%;
     overflow-x: hidden;
-}
-
-#rapp .nav {
-    position: fixed;
-    left: 0;
-    top: 0px;
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff
-}
-
-#rapp .nav a {
-    flex-grow: 1;
-    text-align: center
-}
-
-.slide-left-enter-active {
-    animation: my-in .4s;
-}
-
-.slide-left-leave-active {
-    animation: my-ll .4s;
-}
-
-.slide-right-enter-active {
-    animation: my-out .4s;
-}
-
-.slide-right-leave-active {
-    animation: my-lr .4s;
-}
-
-@keyframes my-in {
-    0% {
-
-        transform: translateX(100%);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-}
-
-@keyframes my-out {
-    0% {
-        transform: translateX(-100%);
-    }
-
-    100% {
-        transform: translateX(0);
-
-    }
-}
-
-@keyframes my-ll {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-100%);
-
-    }
-}
-
-@keyframes my-lr {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(100%);
-
-    }
 }
 </style>

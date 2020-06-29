@@ -1,0 +1,47 @@
+import Vue from 'vue'
+import App from './App.vue'
+import VueRouter from 'vue-router'
+// import Nofound from './page2/Nofound.vue'
+// import Install from './page2/Install.vue'
+// import Alert from './page2/Alert.vue'
+// import Badge from './page2/Badge.vue'
+// import Login from './page2/Login.vue'
+
+const Nofound = () => import('./page2/Nofound.vue') //路由懒加载
+const Install = () => import('./page2/Install.vue') //路由懒加载
+const Alert = () => import('./page2/Alert.vue') //路由懒加载
+const Badge = () => import('./page2/Badge.vue') //路由懒加载
+const Login = () => import('./page2/Login.vue') //路由懒加载
+
+Vue.config.productionTip = false
+Vue.use(VueRouter)
+
+const routes = [
+    { path: '*', component: Nofound },
+    { path: '/', component: Install, meta: { title: '安装',requiresAuth:true } },
+    { path: '/Alert', component: Alert, meta: { title: 'Alert 警告框' } },
+    { path: '/Badge', component: Badge, meta: { title: 'Badge 徽章' } },
+    { path: '/Login', component: Login, meta: { title: '登录页面' } },
+]
+const router = new VueRouter({
+    mode: 'history',
+    routes
+})
+router.beforeEach((to, from, next) => { //方法一：全局守卫方式判断是否登录
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        next({
+            path: '/Login'
+        })
+    } else {
+        next()
+    }
+
+})
+router.afterEach((to, from, next) => {
+    window.document.title = to.meta.title
+})
+
+new Vue({
+    router,
+    render: h => h(App)
+}).$mount('#app')

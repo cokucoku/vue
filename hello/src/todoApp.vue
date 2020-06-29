@@ -7,10 +7,9 @@
 </template>
 <script>
 import todolist from './components/todo/todolist.vue'
-import topmovie from './topmovie.vue'
 export default {
     components: {
-        todolist,topmovie
+        todolist
     }
 }
 </script>
