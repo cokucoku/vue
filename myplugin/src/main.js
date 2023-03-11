@@ -7,7 +7,7 @@ import Pay from './myp/pay.js'
 import City from './myp/city.js'
 Vue.use(Toast)
 Vue.use(Loading)
-Vue.use(Pay,{"mysss":true})
+Vue.use(Pay,{bg:'#f60'})
 Vue.use(switchs)
 Vue.use(City)
 Vue.config.productionTip = false

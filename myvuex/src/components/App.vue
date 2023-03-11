@@ -1,91 +1,72 @@
 <template>
-	<div id="demo">
-    <div class="innum">
-    	<span @click="decrement">-</span>
-    	<span>{{count}}</span>
-    	<span @click="increment">+</span>
-    </div>
-    <div id="todos">
-    	<ul>
-    		<li v-for="item in todos" :class="[item.have?'green':'red']">{{item.title}}</li>
-    	</ul>
-    	<p>总：{{totaldotos}},已完成{{havedo}},未完成{{nohavedo}}</p>
-    </div>
-    <div class="leevueplugin">
-        <!-- 测试插件地方 -->
-        <lee-select v-model="value" filterable placeholder="请选择">
-    <lee-option
-    v-for="item in options"
-    :key="item.value"
-    :label="item.label"
-    :value="item.value">
-    </lee-option>
-</lee-select>
-    </div>
-</div>
+  <div id="demo">
+    <lee-alert title="成功提示的文案" type="success" show-icon closeable @close="close"></lee-alert>
+    <lee-badge title="站内信息" info="8"/>
+    <lee-button @click="show1=true">默认按钮toast</lee-button>
+    <lee-button @click="toast">函数toast</lee-button>
+    <lee-button @click="show2=true">默认按钮dialog</lee-button>
+    <lee-button @click="dialog">函数dialog</lee-button>
+    <lee-toast v-model="show1" title="加载中" type="loading" after="error" after-title="加载失败"
+               :duration="duration" @close="closeT"></lee-toast>
+    <lee-dialog @cancel="cancel" @certain="certain" v-model="show2" effect="scale">水电费水电费</lee-dialog>
+  </div>
 </template>
 <script>
 export default {
     name: 'app',
     data() {
-              return {
-                options: [{
-                  value: '选项1',
-                  label: 'Html'
-                }, {
-                  value: '选项2',
-                  label: 'Css3'
-                }, {
-                  value: '选项3',
-                  label: 'Javascript'
-                }, {
-                  value: '选项4',
-                  label: 'Vue'
-                }, {
-                  value: '选项5',
-                  label: 'React'
-                }],
-                value: ''
-              }
-          },
+        return {
+            show1: true,
+            show2: false,
+            duration: 4000
+        }
+    },
     mounted() {
-    	
+
 
     },
-    computed: {
-    	count(){
-    		return this.$store.state.count
-    	},
-    	todos(){
-    		return this.$store.state.todos
-    	},
-    	totaldotos(){
-    		return this.$store.getters.totaldotos
-    	},
-    	havedo(){
-    		return this.$store.getters.havedo
-    	},
-    	nohavedo(){
-    		return this.$store.getters.nohavedo
-    	}
-
-    },
-    methods:{
-    	decrement(){
-    		this.$store.commit('decrement', 1)
-
-    	},
-    	increment(){
-    		this.$store.commit('increment', 1)
-    	}
+    computed: {},
+    methods: {
+        closeT(){
+           console.log('管比toast')
+        },
+        close() {
+            console.log('比较')
+        },
+        cancel(e) {
+            console.log(e)
+        },
+        certain(e) {
+            console.log(e)
+        },
+        toast() {
+            this.$Toast({
+                title: '登陆中',
+                type: 'loading',
+                after: 'success',
+                afterTitle: '登陆成功',
+                duration: 5000,
+                close: () => {
+                    console.log("挂逼")
+                }
+            })
+        },
+        dialog() {
+            this.$Dialog({
+                title: '春节放假通知',
+                content: '公司与205随时到非撒地方撒地方',
+                effect: 'slideUp',
+                cancel: (e) => {
+                    console.log(e)
+                },
+                certain: (e) => {
+                    console.log(e)
+                }
+            })
+        }
     }
-
 }
 </script>
 <style scoped>
-     .red{color: #f00}
-     .green{color: green}
-	.innum{display: flex;}
-	.innum span{border:solid 1px #ddd;padding:0 8px;margin-left: -1px}
-	.innum span:nth-child(3),.innum span:nth-child(1){background: #EEE;cursor: pointer;}
+
 </style>

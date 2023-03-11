@@ -12,7 +12,7 @@ mypay.install = function(Vue, opt) {
         instance.tempay='';//支付方式清空
         instance.show = true;
         instance.choose = myopt.choose;
-        instance.bg = myopt.bg;
+        instance.bg = opt&&opt.bg?opt.bg:myopt.bg;
     }
     Vue.prototype.$mychoose = function() {
         return instance.pay
