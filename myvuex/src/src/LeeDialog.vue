@@ -10,14 +10,8 @@
           {{content}}
         </div>
         <div class="other">
-          <template v-if="useStyle">
-            <lee-button @click="cancelHandler">取消</lee-button>
-            <lee-button type="primary" @click="certainHandler">确定</lee-button>
-          </template>
-          <template v-else>
-            <lee-button @click="cancel">取消</lee-button>
-            <lee-button type="primary" @click="certain">确定</lee-button>
-          </template>
+          <lee-button @click="cancelHandler">取消</lee-button>
+          <lee-button type="primary" @click="certainHandler">确定</lee-button>
         </div>
       </div>
     </transition>
@@ -43,10 +37,6 @@ export default {
 
     },
     props: {
-        useStyle: {
-            type: Boolean,
-            default: true//这个表示用函数方式false，还是组件方式调用true
-        },
         value: {
             type: Boolean,
             default: false //默认default
@@ -62,16 +52,6 @@ export default {
         effect: {
             type: String,
             default: 'fade' //默认default
-        },
-        cancel: {
-            type: Function,
-            default: () => {
-            }
-        },
-        certain: {
-            type: Function,
-            default: () => {
-            }
         }
 
     }

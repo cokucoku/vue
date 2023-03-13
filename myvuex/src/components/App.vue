@@ -45,7 +45,6 @@ export default {
                 type: 'loading',
                 after: 'success',
                 afterTitle: '登陆成功',
-                duration: 5000,
                 close: () => {
                     console.log("挂逼")
                 }

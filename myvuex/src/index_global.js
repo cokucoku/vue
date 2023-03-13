@@ -27,9 +27,10 @@ LeeVue.install = function (Vue) {
         }
         const myOption = Object.assign(setOption, option)
         toastInstance.value = true
-        toastInstance.useStyle = false
         toastInstance.type = myOption.type
         toastInstance.title = myOption.title
+        toastInstance.after = myOption.after
+        toastInstance.afterTitle = myOption.afterTitle
         toastInstance.duration = myOption.duration
         setTimeout(() => {
             toastInstance.value = false
@@ -42,15 +43,14 @@ LeeVue.install = function (Vue) {
     document.body.appendChild(dialogInstance.$el)
     Vue.prototype.$Dialog = function (opt) {
         dialogInstance.value = true
-        dialogInstance.useStyle = false
         dialogInstance.content = opt.content
         dialogInstance.title = opt.title
         dialogInstance.effect = opt.effect
-        dialogInstance.cancel = () => {
+        dialogInstance.cancelHandler = () => {
             dialogInstance.value = false
             opt.cancel.call(dialogInstance, {flag: false, text: '取消'})
         }
-        dialogInstance.certain = () => {
+        dialogInstance.certainHandler = () => {
             dialogInstance.value = false
             opt.cancel.call(dialogInstance, {flag: true, text: '确定'})
         }

@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="fade" appear >
     <div :class="['lee-toast','lee-toast-'+thetype]" v-if="value">
       <div class="lee-toast-wrap">
         <div class="lee-toast-icon" v-if="thetype==='loading'">
@@ -37,13 +37,6 @@ export default {
             sett: '',
             settc: ''
         }
-    },
-    updated() {
-        //this.fade()
-    },
-    mounted() {
-        //这个是为了组件式函数需要这个
-        //this.fade()
     },
     watch: {
         type: {
@@ -89,24 +82,18 @@ export default {
                     this.$emit('input', false)
                     this.$emit('close')
                     clearTimeout(this.sett)
-
                 }, this.duration)
 
             } else {
                 this.sett = setTimeout(() => {
                     this.$emit('input', false)
                     this.$emit('close')
-
                     clearTimeout(this.sett)
                 }, this.duration)
             }
         }
     },
     props: {
-        useStyle: {
-            type: Boolean,
-            default: true //默认default
-        },
         title: {
             type: String,
             default: '提示文字' //默认default
