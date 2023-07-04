@@ -1,5 +1,9 @@
 <template>
   <div id="demo">
+    <lee-tag-group :tag="tag" closeable>
+        <lee-tag :item="item" v-for="(item,xh) in tag" :key="xh"></lee-tag>
+</lee-tag-group>
+    ----------------------------------------------
     <lee-alert title="成功提示的文案" type="success" show-icon closeable @close="close"></lee-alert>
     <lee-badge title="站内信息" info="8"/>
     <lee-button @click="show1=true">默认按钮toast</lee-button>
@@ -18,7 +22,14 @@ export default {
         return {
             show1: true,
             show2: false,
-            duration: 4000
+            duration: 4000,
+             tag:[
+                { t: '活泼',color:'#67c23a'},
+                { t: '聪明',color:'#909399' },
+                { t: '可爱',color:'#409eff' },
+                { t: '温柔',color:'#e6a23c' },
+                { t: '美腿',color:'#f56c6c' }
+                ]
         }
     },
     mounted() {
